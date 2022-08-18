@@ -111,14 +111,18 @@ class _CarouselState extends State<Carousel> {
                     fontSize: 18,
                     color: Colors.white,
                   ))),
-          ElevatedButton(
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: ElevatedButton(
               style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(8),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   primary: Color(0xFF7BC144),
                   elevation: 5,
                   shadowColor: Color(0xFF7BC144),
                   fixedSize: const Size(267.0, 50.0),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5))),
+                  borderRadius: BorderRadius.circular(5))),
               onPressed: () {
                 print("Página de Registro");
               },
@@ -127,7 +131,7 @@ class _CarouselState extends State<Carousel> {
                     fontFamily: "Arial",
                     fontSize: 18,
                     color: Colors.white,
-                  ))),
+                  )))),
         ])
       ],
     );
