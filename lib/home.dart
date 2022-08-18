@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -11,33 +12,32 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.white,
-            title: Center(
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "images/mini-logo.png",
-                      width: 30,
-                      height: 30,
-                    ),
-                    Text(
-                      "BILLS ",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    Text(
-                      "BID",
-                      style: TextStyle(color: Color(0xFF7BC144)),
-                    )
-                  ],
-                ),
+      appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Center(
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "images/mini-logo.png",
+                    width: 30,
+                    height: 30,
+                  ),
+                  Text(
+                    "BILLS ",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  Text(
+                    "BID",
+                    style: TextStyle(color: Color(0xFF7BC144)),
+                  )
+                ],
               ),
-            )),
-        body: Center(
-          child: Carousel(),
-        ));
+            ),
+          )),
+      body: Center(child: Carousel()),
+    );
   }
 }
 
@@ -54,9 +54,9 @@ class _CarouselState extends State<Carousel> {
   late PageController _pageController;
 
   List<String> imagesC = [
-    "images/teste1.png",
-    "images/teste2.png",
-    "images/teste3.png"
+    "images/testeFODA.png",
+    "images/teste3.png",
+    "images/teste2.png"
   ];
 
   int activePage = 1;
@@ -70,10 +70,11 @@ class _CarouselState extends State<Carousel> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: 200,
+          height: 335,
           child: PageView.builder(
             itemCount: imagesC.length,
             pageSnapping: true,
@@ -91,7 +92,43 @@ class _CarouselState extends State<Carousel> {
         ),
         Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: indicators(imagesC.length, activePage))
+            children: indicators(imagesC.length, activePage)),
+        Column(children: [
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: Color(0xFF7BC144),
+                  elevation: 5,
+                  shadowColor: Color(0xFF7BC144),
+                  fixedSize: const Size(267.0, 50.0),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5))),
+              onPressed: () {
+                print("Página de Login");
+              },
+              child: const Text("LOGIN",
+                  style: TextStyle(
+                    fontFamily: "Arial",
+                    fontSize: 18,
+                    color: Colors.white,
+                  ))),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: Color(0xFF7BC144),
+                  elevation: 5,
+                  shadowColor: Color(0xFF7BC144),
+                  fixedSize: const Size(267.0, 50.0),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5))),
+              onPressed: () {
+                print("Página de Registro");
+              },
+              child: const Text("REGISTER",
+                  style: TextStyle(
+                    fontFamily: "Arial",
+                    fontSize: 18,
+                    color: Colors.white,
+                  ))),
+        ])
       ],
     );
   }
@@ -99,7 +136,6 @@ class _CarouselState extends State<Carousel> {
 
 AnimatedContainer slider(imagesC, pagePosition, active) {
   double margin = active ? 10 : 20;
-
   return AnimatedContainer(
     duration: Duration(milliseconds: 500),
     curve: Curves.easeInOutCubic,
@@ -108,9 +144,6 @@ AnimatedContainer slider(imagesC, pagePosition, active) {
         image:
             new DecorationImage(image: ExactAssetImage(imagesC[pagePosition]))),
   );
-  if (pagePosition == 1) {
-    const Text("texto1");
-  }
 }
 
 imageAnimation(PageController animation, imagesC, pagePosition) {
