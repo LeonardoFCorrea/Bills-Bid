@@ -1,5 +1,13 @@
+import 'package:bills_bid/login.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    title: 'Home',
+    home: Home(),
+  ));
+}
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -103,7 +111,10 @@ class _CarouselState extends State<Carousel> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5))),
               onPressed: () {
-                print("Página de Login");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
               },
               child: const Text("LOGIN",
                   style: TextStyle(
@@ -112,26 +123,30 @@ class _CarouselState extends State<Carousel> {
                     color: Colors.white,
                   ))),
           Padding(
-            padding: EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.all(8),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  primary: Color(0xFF7BC144),
-                  elevation: 5,
-                  shadowColor: Color(0xFF7BC144),
-                  fixedSize: const Size(267.0, 50.0),
-                  shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5))),
-              onPressed: () {
-                print("Página de Registro");
-              },
-              child: const Text("REGISTER",
-                  style: TextStyle(
-                    fontFamily: "Arial",
-                    fontSize: 18,
-                    color: Colors.white,
-                  )))),
+              padding: EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(8),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      primary: Color(0xFF7BC144),
+                      elevation: 5,
+                      shadowColor: Color(0xFF7BC144),
+                      fixedSize: const Size(267.0, 50.0),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5))),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()),
+                    );
+                  },
+                  child: const Text("REGISTER",
+                      style: TextStyle(
+                        fontFamily: "Arial",
+                        fontSize: 18,
+                        color: Colors.white,
+                      )))),
         ])
       ],
     );
