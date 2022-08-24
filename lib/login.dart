@@ -12,12 +12,13 @@ class _LoginState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFFFFFFF),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
+        body: Container(
+      // decoration: BoxDecoration(
+      //     image: DecorationImage(
+      //   image: AssetImage("images/login-1.png"),
+      //   fit: BoxFit.cover,
+      // )),
+      child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(10),
           child: Center(
@@ -28,11 +29,6 @@ class _LoginState extends State<LoginPage> {
                   padding: EdgeInsets.only(top: 30, bottom: 0),
                   child: Column(
                     children: [
-                      Image.asset(
-                        "images/big-logo.png",
-                        width: 133,
-                        height: 133,
-                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -52,7 +48,8 @@ class _LoginState extends State<LoginPage> {
                 ),
                 Padding(
                     padding: EdgeInsets.only(top: 50, left: 20, right: 20),
-                    child: Column(children: [
+                    child: Form(
+                        child: Column(children: [
                       TextFormField(
                         autofocus: true,
                         style: new TextStyle(color: Colors.black, fontSize: 20),
@@ -87,7 +84,7 @@ class _LoginState extends State<LoginPage> {
                                 labelStyle:
                                     TextStyle(color: Color(0xFF7BC144))),
                           ))
-                    ])),
+                    ]))),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -169,6 +166,6 @@ class _LoginState extends State<LoginPage> {
           ),
         ),
       ),
-    );
+    ));
   }
 }
