@@ -4,7 +4,7 @@ import 'package:bills_bid/home.dart';
 
 void main(List<String> args) {
   runApp(MaterialApp(
-    home: RegisterPage(),
+    home: Home(),
     debugShowCheckedModeBanner: false,
   ));
 }
