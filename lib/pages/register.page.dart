@@ -63,6 +63,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           style:
                               new TextStyle(color: Colors.black, fontSize: 17),
                           decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF7BC144))),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Color(0xFF7BC144)),
+                              ),
                             labelText: "Name:",
                             labelStyle: TextStyle(color: Colors.black),
                           ),
@@ -73,6 +78,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           style:
                               new TextStyle(color: Colors.black, fontSize: 17),
                           decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF7BC144))),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Color(0xFF7BC144)),
+                              ),
                             labelText: "UserName:",
                             labelStyle: TextStyle(color: Colors.black),
                           ),
@@ -83,6 +93,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           style:
                               new TextStyle(color: Colors.black, fontSize: 17),
                           decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF7BC144))),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Color(0xFF7BC144)),
+                              ),
                             labelText: "Email Address:",
                             labelStyle: TextStyle(color: Colors.black),
                           ),
@@ -93,6 +108,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           style:
                               new TextStyle(color: Colors.black, fontSize: 17),
                           decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF7BC144))),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Color(0xFF7BC144)),
+                              ),
                             labelText: "Birth Date:",
                             labelStyle: TextStyle(color: Colors.black),
                           ),
@@ -103,6 +123,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           style:
                               new TextStyle(color: Colors.black, fontSize: 17),
                           decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF7BC144))),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Color(0xFF7BC144)),
+                              ),
                             labelText: "Phone:",
                             labelStyle: TextStyle(color: Colors.black),
                           ),
@@ -113,6 +138,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           style:
                               new TextStyle(color: Colors.black, fontSize: 17),
                           decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF7BC144))),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Color(0xFF7BC144)),
+                              ),
                             labelText: "Password:",
                             labelStyle: TextStyle(color: Colors.black),
                           ),
@@ -123,6 +153,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           style:
                               new TextStyle(color: Colors.black, fontSize: 17),
                           decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF7BC144))),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Color(0xFF7BC144)),
+                              ),
                             labelText: "Confirm Password:",
                             labelStyle: TextStyle(color: Colors.black),
                           ),
