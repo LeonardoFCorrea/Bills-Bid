@@ -1,9 +1,9 @@
-import 'package:bills_bid/pages/register.page.dart';
+import 'package:bills_bid/register.dart';
 import 'package:flutter/material.dart';
 
 void main(List<String> args) {
   runApp(MaterialApp(
-    home: RegisterPage(),
+    home: Register(),
     debugShowCheckedModeBanner: false,
   ));
 }
