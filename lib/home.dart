@@ -20,32 +20,15 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Center(
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "images/mini-logo.png",
-                    width: 30,
-                    height: 30,
-                  ),
-                  Text(
-                    "BILLS ",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  Text(
-                    "BID",
-                    style: TextStyle(color: Color(0xFF7BC144)),
-                  )
-                ],
-              ),
-            ),
-          )),
-      body: Center(child: Carousel()),
-    );
+        body: Container(
+      height: double.infinity,
+      width: double.maxFinite,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("images/green_template.png"),
+              fit: BoxFit.cover)),
+      child: Center(child: Carousel()),
+    ));
   }
 }
 
@@ -77,79 +60,101 @@ class _CarouselState extends State<Carousel> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: 335,
-          child: PageView.builder(
-            itemCount: imagesC.length,
-            pageSnapping: true,
-            controller: _pageController,
-            onPageChanged: (page) {
-              setState(() {
-                activePage = page;
-              });
-            },
-            itemBuilder: (context, pagePosition) {
-              bool active = pagePosition == activePage;
-              return slider(imagesC, pagePosition, active);
-            },
-          ),
+    return Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: 335,
+        child: PageView.builder(
+          itemCount: imagesC.length,
+          pageSnapping: true,
+          controller: _pageController,
+          onPageChanged: (page) {
+            setState(() {
+              activePage = page;
+            });
+          },
+          itemBuilder: (context, pagePosition) {
+            bool active = pagePosition == activePage;
+            return slider(imagesC, pagePosition, active);
+          },
         ),
-        Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: indicators(imagesC.length, activePage)),
-        Column(children: [
-          ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  primary: Color(0xFF7BC144),
-                  elevation: 5,
-                  shadowColor: Color(0xFF7BC144),
-                  fixedSize: const Size(267.0, 50.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5))),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              },
-              child: const Text("LOGIN",
-                  style: TextStyle(
-                    fontFamily: "Arial",
-                    fontSize: 18,
-                    color: Colors.white,
-                  ))),
-          Padding(
-              padding: EdgeInsets.all(16.0),
-              child: ElevatedButton(
+      ),
+      Padding(
+          padding: EdgeInsets.only(left: 55, bottom: 0, right: 55),
+          child: Column(
+            children: [
+              ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(8),
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      primary: Color(0xFF7BC144),
+                      primary: Color(0xFF607C4B),
                       elevation: 5,
                       shadowColor: Color(0xFF7BC144),
-                      fixedSize: const Size(267.0, 50.0),
+                      fixedSize: const Size(266, 39.0),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5))),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(0),
+                              topRight: Radius.circular(18),
+                              bottomLeft: Radius.circular(18),
+                              bottomRight: Radius.circular(18)))),
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const LoginPage()),
+                          builder: (context) =>
+                              const LoginPage()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
                     );
                   },
-                  child: const Text("REGISTER",
+                  child: const Text("LOGIN",
                       style: TextStyle(
                         fontFamily: "Arial",
                         fontSize: 18,
                         color: Colors.white,
-                      )))),
-        ])
-      ],
-    );
+                      ))),
+              Padding(
+                padding: EdgeInsets.only(top: 12),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        primary: Color(0xFF607C4B),
+                        elevation: 5,
+                        shadowColor: Color(0xFF7BC144),
+                        fixedSize: const Size(266, 39.0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(18),
+                                bottomLeft: Radius.circular(18),
+                                bottomRight: Radius.circular(18)))),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const LoginPage()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
+                      );
+                    },
+                    child: const Text("LOGIN",
+                        style: TextStyle(
+                          fontFamily: "Arial",
+                          fontSize: 18,
+                          color: Colors.white,
+                        ))),
+              ),
+              Text("By registering, you agree to the"),
+              RichText(
+                text: TextSpan(
+                  text: 'Hello ',
+                  style: DefaultTextStyle.of(context).style,
+                  children: <TextSpan>[
+                    TextSpan(text: "User Notice", style: TextStyle()),
+                    TextSpan(text: " and "),
+                    TextSpan(text: "Privacy Policy")
+                  ],
+                ),
+              )
+            ],
+          )),
+    ]);
   }
 }
 
