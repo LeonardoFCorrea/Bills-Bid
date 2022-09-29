@@ -1,4 +1,5 @@
 import 'package:bills_bid/login.dart';
+import 'package:bills_bid/register.dart';
 // import 'package:bills_bid/register.page.dart';
 import 'package:flutter/material.dart';
 
@@ -130,10 +131,10 @@ class _CarouselState extends State<Carousel> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const LoginPage()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
+                                const RegisterPage()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
                       );
                     },
-                    child: const Text("LOGIN",
+                    child: const Text("REGISTER",
                         style: TextStyle(
                           fontFamily: "Arial",
                           fontSize: 18,
