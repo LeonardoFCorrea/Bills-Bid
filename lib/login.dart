@@ -1,4 +1,7 @@
+import 'package:bills_bid/register.dart';
+import 'package:bills_bid/resetPassword.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,16 +14,6 @@ class _LoginState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   toolbarHeight: 75,
-        //   backgroundColor: Color(0xFF7BC144),
-        //   automaticallyImplyLeading: false,
-        //   elevation: 0,
-        //   actions: [
-        //     Image.asset("images/new-logo.png"),
-        //     Padding(padding: EdgeInsets.only(right: 17))
-        //   ],
-        // ),
         body: Container(
       height: double.infinity,
       width: double.maxFinite,
@@ -34,7 +27,7 @@ class _LoginState extends State<LoginPage> {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+              children: [
                 Padding(
                     padding: EdgeInsets.only(left: 300, top: 40),
                     child: Image.asset("images/new-logo.png")),
@@ -161,7 +154,8 @@ class _LoginState extends State<LoginPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const LoginPage()));
+                                    builder: (context) =>
+                                        const ResetPassword()));
                           },
                         )
                       ],
@@ -170,11 +164,16 @@ class _LoginState extends State<LoginPage> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(left: 58, top: 4),
-                      child: Text("Doesn't have an account?"),
+                      child: Text(
+                        "Doesn't have an account?",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
                     InkWell(
                       child: Padding(
-                        padding: EdgeInsets.only(left: 11, top: 4),
+                        padding: EdgeInsets.only(left: 8, top: 4),
                         child: Text(
                           'Sign Up here',
                           style: TextStyle(color: Colors.white),
@@ -183,8 +182,11 @@ class _LoginState extends State<LoginPage> {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginPage()));
+                            PageTransition(
+                                type: PageTransitionType.rightToLeftWithFade,
+                                duration: Duration(milliseconds: 550),
+                                child: RegisterPage(),
+                                childCurrent: LoginPage()));
                       },
                     )
                   ],
