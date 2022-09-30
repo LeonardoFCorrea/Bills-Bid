@@ -1,5 +1,7 @@
+import 'package:bills_bid/home.dart';
 import 'package:bills_bid/login.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -28,9 +30,35 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.only(left: 300, top: 40),
-                        child: Image.asset("images/new-logo.png")),
+                    Row(children: [
+                      Padding(
+                          padding: EdgeInsets.only(left: 14, top: 40),
+                          child: InkWell(
+                            child: Padding(
+                              padding: EdgeInsets.only(),
+                              child: Text(
+                                '< BACK',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType
+                                          .rightToLeftWithFade,
+                                      duration: Duration(milliseconds: 550),
+                                      child: Home(),
+                                      childCurrent: RegisterPage()));
+                            },
+                          )),
+                      Padding(
+                          padding: EdgeInsets.only(left: 230, top: 40),
+                          child: Image.asset("images/new-logo.png")),
+                    ]),
                     Padding(
                       padding:
                           const EdgeInsets.only(left: 0, bottom: 0, right: 150),
@@ -39,7 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           Text(
                             "CREATE",
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize: 45,
                             ),
                           ),
@@ -54,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           Text(
                             "ACCOUNT",
                             style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: Color(0xFF607C4B),
                               fontSize: 45,
                             ),
                           )

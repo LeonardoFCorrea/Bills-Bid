@@ -1,3 +1,4 @@
+import 'package:bills_bid/home.dart';
 import 'package:bills_bid/register.dart';
 import 'package:bills_bid/resetPassword.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +29,34 @@ class _LoginState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                    padding: EdgeInsets.only(left: 300, top: 40),
-                    child: Image.asset("images/new-logo.png")),
+                Row(children: [
+                  Padding(
+                      padding: EdgeInsets.only(left: 14, top: 40),
+                      child: InkWell(
+                        child: Padding(
+                          padding: EdgeInsets.only(),
+                          child: Text(
+                            '< BACK',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  type: PageTransitionType.rightToLeftWithFade,
+                                  duration: Duration(milliseconds: 550),
+                                  child: Home(),
+                                  childCurrent: LoginPage()));
+                        },
+                      )),
+                  Padding(
+                      padding: EdgeInsets.only(left: 230, top: 40),
+                      child: Image.asset("images/new-logo.png")),
+                ]),
                 Padding(
                     padding: EdgeInsets.only(top: 400, left: 20, right: 20),
                     child: Form(

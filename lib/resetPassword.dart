@@ -1,4 +1,6 @@
+import 'package:bills_bid/login.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({Key? key}) : super(key: key);
@@ -26,9 +28,36 @@ class _ResetPasswordState extends State<ResetPassword> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.only(left: 300, top: 40),
-                        child: Image.asset("images/new-logo.png")),
+                    Row(children: [
+                      Padding(
+                          padding: EdgeInsets.only(left: 14, top: 40),
+                          child: InkWell(
+                            child: Padding(
+                              padding: EdgeInsets.only(),
+                              child: Text(
+                                '< BACK',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type:
+                                        PageTransitionType.rightToLeftWithFade,
+                                    duration: Duration(milliseconds: 550),
+                                    child: LoginPage(),
+                                    childCurrent: ResetPassword(),
+                                  ));
+                            },
+                          )),
+                      Padding(
+                          padding: EdgeInsets.only(left: 220, top: 40),
+                          child: Image.asset("images/new-logo.png")),
+                    ]),
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 0, bottom: 0, right: 150, top: 140),
