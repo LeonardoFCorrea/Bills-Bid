@@ -112,7 +112,7 @@ class _CarouselState extends State<Carousel> {
                         color: Colors.white,
                       ))),
               Padding(
-                padding: EdgeInsets.only(top: 12),
+                padding: EdgeInsets.only(top: 12, bottom: 10),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,

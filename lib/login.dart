@@ -1,3 +1,4 @@
+import 'package:bills_bid/dashboard.dart';
 import 'package:bills_bid/home.dart';
 import 'package:bills_bid/register.dart';
 import 'package:bills_bid/resetPassword.dart';
@@ -158,7 +159,7 @@ class _LoginState extends State<LoginPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const LoginPage()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
+                                          const DashboardPage()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
                                 );
                               },
                               child: const Text("LOGIN",
@@ -207,12 +208,14 @@ class _LoginState extends State<LoginPage> {
                       ),
                       onTap: () {
                         Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.rightToLeftWithFade,
-                                duration: Duration(milliseconds: 550),
-                                child: RegisterPage(),
-                                childCurrent: LoginPage()));
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.rightToLeftWithFade,
+                            duration: Duration(milliseconds: 550),
+                            child: RegisterPage(),
+                            childCurrent: LoginPage(),
+                          ),
+                        );
                       },
                     )
                   ],
