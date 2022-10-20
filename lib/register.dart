@@ -45,14 +45,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ),
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  PageTransition(
-                                      type: PageTransitionType
-                                          .rightToLeftWithFade,
-                                      duration: Duration(milliseconds: 550),
-                                      child: Home(),
-                                      childCurrent: RegisterPage()));
+                              Navigator.pop(
+                                context,
+                              );
                             },
                           )),
                       Padding(

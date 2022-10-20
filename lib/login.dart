@@ -45,13 +45,9 @@ class _LoginState extends State<LoginPage> {
                           ),
                         ),
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  type: PageTransitionType.rightToLeftWithFade,
-                                  duration: Duration(milliseconds: 550),
-                                  child: Home(),
-                                  childCurrent: LoginPage()));
+                          Navigator.pop(
+                            context,
+                          );
                         },
                       )),
                   Padding(

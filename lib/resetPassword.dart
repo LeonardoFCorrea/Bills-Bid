@@ -43,15 +43,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                               ),
                             ),
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type:
-                                        PageTransitionType.rightToLeftWithFade,
-                                    duration: Duration(milliseconds: 550),
-                                    child: LoginPage(),
-                                    childCurrent: ResetPassword(),
-                                  ));
+                              Navigator.pop(
+                                context,
+                              );
                             },
                           )),
                       Padding(

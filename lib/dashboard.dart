@@ -1,7 +1,4 @@
-import 'package:bills_bid/home.dart';
-import 'package:bills_bid/login.dart';
-import 'package:bills_bid/register.dart';
-import 'package:bills_bid/resetPassword.dart';
+import 'package:bills_bid/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -343,69 +340,70 @@ class _DashboardState extends State<DashboardPage> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 11, bottom: 10),
-                  child: Container(
-                    height: 45,
-                    width: 309,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        InkWell(
-                          child: Image.asset('images/groups-icon.png'),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.rightToLeftWithFade,
-                                duration: Duration(milliseconds: 550),
-                                child: DashboardPage(),
-                                childCurrent: DashboardPage(),
-                              ),
-                            );
-                          },
-                        ),
-                        InkWell(
-                          child: Image.asset('images/home-icon.png'),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.rightToLeftWithFade,
-                                duration: Duration(milliseconds: 550),
-                                child: DashboardPage(),
-                                childCurrent: DashboardPage(),
-                              ),
-                            );
-                          },
-                        ),
-                        InkWell(
-                          child: Image.asset('images/profile-icon.png'),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.rightToLeftWithFade,
-                                duration: Duration(milliseconds: 550),
-                                child: DashboardPage(),
-                                childCurrent: DashboardPage(),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                )
+                DownMenu(),
               ],
             ),
           ),
         ),
       ),
     ));
+  }
+}
+
+class DownMenu extends StatefulWidget {
+  const DownMenu({Key? key}) : super(key: key);
+
+  @override
+  State<DownMenu> createState() => _DownMenuState();
+}
+
+class _DownMenuState extends State<DownMenu> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 11, bottom: 10),
+      child: Container(
+        height: 45,
+        width: 309,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            InkWell(
+              child: Image.asset('images/groups-icon.png'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DashboardPage()),
+                );
+              },
+            ),
+            InkWell(
+              child: Image.asset('images/dashboard-icon.png'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DashboardPage()),
+                );
+              },
+            ),
+            InkWell(
+              child: Image.asset('images/profile-icon.png'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
