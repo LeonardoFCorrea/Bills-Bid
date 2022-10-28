@@ -1,7 +1,5 @@
-import 'package:bills_bid/home.dart';
 import 'package:bills_bid/login.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);

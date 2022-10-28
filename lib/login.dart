@@ -1,9 +1,7 @@
 import 'package:bills_bid/dashboard.dart';
-import 'package:bills_bid/home.dart';
 import 'package:bills_bid/register.dart';
 import 'package:bills_bid/resetPassword.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -204,14 +202,9 @@ class _LoginState extends State<LoginPage> {
                       ),
                       onTap: () {
                         Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.rightToLeftWithFade,
-                            duration: Duration(milliseconds: 550),
-                            child: RegisterPage(),
-                            childCurrent: LoginPage(),
-                          ),
-                        );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const RegisterPage()));
                       },
                     )
                   ],
