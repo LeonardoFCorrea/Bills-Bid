@@ -1,6 +1,7 @@
+import 'package:bills_bid/components/NavigationSystem.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'components/DownMenu.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -340,7 +341,6 @@ class _DashboardState extends State<DashboardPage> {
                     ],
                   ),
                 ),
-                DownMenu(),
               ],
             ),
           ),

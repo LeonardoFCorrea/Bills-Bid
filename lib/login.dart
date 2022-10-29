@@ -1,3 +1,4 @@
+import 'package:bills_bid/components/NavigationSystem.dart';
 import 'package:bills_bid/dashboard.dart';
 import 'package:bills_bid/register.dart';
 import 'package:bills_bid/resetPassword.dart';
@@ -43,9 +44,7 @@ class _LoginState extends State<LoginPage> {
                           ),
                         ),
                         onTap: () {
-                          Navigator.pop(
-                            context,
-                          );
+                          Navigator.pop(context);
                         },
                       )),
                   Padding(
@@ -153,7 +152,7 @@ class _LoginState extends State<LoginPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const DashboardPage()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
+                                          const Teste()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
                                 );
                               },
                               child: const Text("LOGIN",

@@ -1,6 +1,5 @@
+import 'package:bills_bid/components/NavigationSystem.dart';
 import 'package:flutter/material.dart';
-
-import 'components/DownMenu.dart';
 import 'components/line.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -31,32 +30,8 @@ class _ProfileState extends State<ProfilePage> {
           child: Center(
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 14, top: 70),
-                      child: InkWell(
-                        child: Padding(
-                          padding: EdgeInsets.only(),
-                          child: Text(
-                            '< BACK',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.pop(
-                            context,
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
                 SizedBox(
-                  height: 40,
+                  height: 110,
                 ),
                 Container(
                   height: 140,
@@ -104,7 +79,7 @@ class _ProfileState extends State<ProfilePage> {
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 16, right: 16),
-                  height: 384,
+                  height: 415,
                   decoration: BoxDecoration(
                     color: Colors.white,
                   ),
@@ -264,8 +239,7 @@ class _ProfileState extends State<ProfilePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const ProfilePage()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
+                                builder: (context) => const ProfilePage()),
                           );
                         },
                         child: const Text(
@@ -280,7 +254,6 @@ class _ProfileState extends State<ProfilePage> {
                     ],
                   ),
                 ),
-                DownMenu(),
               ],
             ),
           ),
