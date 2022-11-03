@@ -1,263 +1,228 @@
-import 'dart:html';
-
-import 'package:bills_bid/home.dart';
-import 'package:bills_bid/register.dart';
-import 'package:bills_bid/resetPassword.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:flutter/services.dart';
 
-
-class createGroupPageWidget extends StatefulWidget {
-  const createGroupPageWidget({Key? key}) : super(key: key);
+class createGroupPage extends StatefulWidget {
+  const createGroupPage({Key? key}) : super(key: key);
 
   @override
-  _createGroupPageWidgetState createState() => _createGroupPageWidgetState();
+  State<createGroupPage> createState() => _ProfileState();
 }
 
-class _createGroupPageWidgetState extends State<createGroupPageWidget> {
-  TextEditingController? textController1;
-  TextEditingController? textController2;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    textController1?.dispose();
-    textController2?.dispose();
-    super.dispose();
-  }
-
+class _ProfileState extends State<createGroupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: Color(0xFF559E1C),
-      appBar: AppBar(
-        backgroundColor: Color(0xFF559E1C),
-        automaticallyImplyLeading: true,
-        actions: [],
-        centerTitle: true,
-        elevation: 4,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Stack(
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(30, 0, 30, 0),
+      body: Container(
+          height: double.infinity,
+          width: double.maxFinite,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF7BC144),
+                Color(0xFF72CB2C),
+                Color(0xFF7BC144),
+              ],
+            ),
+          ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(0),
+              child: Center(
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
                   children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 300,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF559E1C),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    SizedBox(
+                      height: 110,
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(-0.35, -0.2),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                        child: Container(
-                          width: 1122,
-                          child: TextFormField(
-                            controller: textController1,
-                            autofocus: true,
-                            obscureText: false,
+                    Container(
+                        height: 160,
+                        width: 400,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF559E1C),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Stack(
+                              children: [
+                                Image.asset("images/grupo-teste.png"),
+                                IconButton(
+                                  icon: Image.asset("images/add-group.png"),
+                                  onPressed: () {},
+                                )
+                              ],
+                            )
+                          ],
+                        )),
+                    SizedBox(
+                      height: 72,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 16, right: 16),
+                      height: 460,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 42,
+                          ),
+                          TextFormField(
                             decoration: InputDecoration(
-                              hintText: 'Nome',
+                              labelText: "Name of Group",
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always,
+                              labelStyle: TextStyle(),
+                              icon: Icon(CupertinoIcons.group, size: 30),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1,
+                                  color: Color(0xff7BC144),
                                 ),
-                                borderRadius: BorderRadius.circular(20),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(20),
+                                borderSide:
+                                    BorderSide(color: Color(0xff7BC144)),
                               ),
-                              errorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              focusedErrorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              filled: true,
-                              fillColor: Color(0xFF559E1C),
-                              contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                              counterStyle: TextStyle(color: Color(0xFF559E1C)),
                             ),
-                            style:
-                                TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.normal,
+                            maxLines: 1,
+                            maxLength: 25,
+                            maxLengthEnforcement: MaxLengthEnforcement
+                                .truncateAfterCompositionEnds,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              labelText: "Description",
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always,
+                              icon: Icon(
+                                CupertinoIcons.chat_bubble_text,
+                                size: 30,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(0),
+                                    topRight: Radius.circular(18),
+                                    bottomLeft: Radius.circular(18),
+                                    bottomRight: Radius.circular(18)),
+                                borderSide: BorderSide(
+                                  color: Color(0xFF7BC144),
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(0),
+                                    topRight: Radius.circular(18),
+                                    bottomLeft: Radius.circular(18),
+                                    bottomRight: Radius.circular(18)),
+                                borderSide: BorderSide(
+                                  color: Color(0xFF7BC144),
+                                ),
+                              ),
+                              counterStyle: TextStyle(color: Color(0xFF559E1C)),
+                            ),
+                            maxLines: 5,
+                            maxLength: 255,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            height: 61,
+                            width: 300,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(18),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.shade600,
+                                      spreadRadius: 1,
+                                      blurRadius: 15),
+                                  BoxShadow(
+                                    color: Colors.white,
+                                    offset: const Offset(0.0, 0.0),
+                                    blurRadius: 0.0,
+                                    spreadRadius: 0.0,
+                                  ),
+                                ]),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      tapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
+                                      primary: Color(0xff7BC144),
+                                      fixedSize: const Size(130, 23),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15))),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const createGroupPage()),
+                                    );
+                                  },
+                                  child: const Text(
+                                    "CODE GENERATE",
+                                    style: TextStyle(
+                                      fontFamily: "Arial",
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
                                     ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                      child: TextFormField(
-                        controller: textController2,
-                        autofocus: true,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          hintText: 'CPF',
-                  
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          errorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          focusedErrorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          filled: true,
-                          
-                          contentPadding:
-                              EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-                        ),
-                        style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.normal,
-                            ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Container(
-                          width: 300,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            color: Color(0x00000000),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              FlatButton(
-      onPressed: () {  },
-      height: 150,
-      minWidth: 150,
-      color: Colors.grey,
-      padding: EdgeInsets.all(0),
-      child: Text(
-        "some text",
-        style: TextStyle(color: Colors.white),
-      ),
-    ),
-                                  
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-                                child: Text(
-                                  'X34TCD',
-          
+                                  ),
                                 ),
-                              ),
-                             FlatButton(
-      onPressed: () {  },
-      height: 150,
-      minWidth: 150,
-      color: Colors.grey,
-      padding: EdgeInsets.all(0),
-      child: Text(
-        "some text",
-        style: TextStyle(color: Colors.white),
-                              ),
-                              ),
-                            ],
+                                Text(
+                                  "X34TCD",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Icon(
+                                  CupertinoIcons.doc_on_doc_fill,
+                                  color: Color(0xff57902A),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                        child: ElevatedButton(
-                            child: Text(
-                              "Salvar",
+                          SizedBox(
+                            height: 40,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                primary: Color(0xff7BC144),
+                                fixedSize: const Size(267, 43),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15))),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const createGroupPage()),
+                              );
+                            },
+                            child: const Text(
+                              "EDIT PROFILE",
                               style: TextStyle(
+                                fontFamily: "Arial",
+                                fontSize: 18,
                                 color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
                               ),
                             ),
-                            onPressed: () {},
-                            style: ButtonStyle(
-                              minimumSize:
-                                  MaterialStateProperty.all(Size(130, 45)),
-                              elevation: MaterialStateProperty.all(0),
-                              backgroundColor: MaterialStateProperty.all(
-                                Color(0xFF8A82E2),
-                              ),
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                              ),
-                            )),
+                          ),
+                        ],
                       ),
+                    ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
+          )),
     );
   }
 }
