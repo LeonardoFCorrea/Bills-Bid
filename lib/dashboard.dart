@@ -1,3 +1,4 @@
+import 'package:bills_bid/addFunds.dart';
 import 'package:bills_bid/components/NavigationSystem.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -90,7 +91,7 @@ class _DashboardState extends State<DashboardPage> {
                             PageTransition(
                               type: PageTransitionType.rightToLeftWithFade,
                               duration: Duration(milliseconds: 550),
-                              child: DashboardPage(),
+                              child: AddFundsPage(),
                               childCurrent: DashboardPage(),
                             ),
                           );

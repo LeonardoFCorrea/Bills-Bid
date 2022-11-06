@@ -4,28 +4,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-class TesteComponent extends StatefulWidget {
-  const TesteComponent({Key? key}) : super(key: key);
+class NavigationSystem extends StatefulWidget {
+  const NavigationSystem({Key? key}) : super(key: key);
 
   @override
-  State<TesteComponent> createState() => _TesteComponentState();
+  State<NavigationSystem> createState() => _NavigationSystemState();
 }
 
-class _TesteComponentState extends State<TesteComponent> {
+class _NavigationSystemState extends State<NavigationSystem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold();
   }
 }
 
-class Teste extends StatefulWidget {
-  const Teste({Key? key}) : super(key: key);
+class NavigationSystemC extends StatefulWidget {
+  const NavigationSystemC({Key? key}) : super(key: key);
 
   @override
-  State<Teste> createState() => _TesteState();
+  State<NavigationSystemC> createState() => _NavigationSystemCState();
 }
 
-class _TesteState extends State<Teste> {
+class _NavigationSystemCState extends State<NavigationSystemC> {
   PersistentTabController _controller =
       PersistentTabController(initialIndex: 1);
 

@@ -152,7 +152,7 @@ class _LoginState extends State<LoginPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const Teste()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
+                                          const NavigationSystemC()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
                                 );
                               },
                               child: const Text("LOGIN",

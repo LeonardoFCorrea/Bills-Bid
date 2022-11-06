@@ -70,7 +70,7 @@ class _ProfileState extends State<createGroupPage> {
                           ),
                           TextFormField(
                             decoration: InputDecoration(
-                              labelText: "Name of Group",
+                              labelText: "Group Name",
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.always,
                               labelStyle: TextStyle(),

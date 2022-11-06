@@ -1,4 +1,5 @@
 import 'package:bills_bid/components/NavigationSystem.dart';
+import 'package:bills_bid/editProfile.dart';
 import 'package:flutter/material.dart';
 import 'components/line.dart';
 
@@ -230,16 +231,19 @@ class _ProfileState extends State<ProfilePage> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            primary: Color(0xff7BC144),
-                            fixedSize: const Size(267, 43),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          primary: Color(0xff7BC144),
+                          fixedSize: const Size(267, 43),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const ProfilePage()),
+                              builder: (context) => const EditProfilePage(),
+                            ),
                           );
                         },
                         child: const Text(
