@@ -1,8 +1,10 @@
 import 'package:bills_bid/components/NavigationSystem.dart';
 import 'package:bills_bid/dashboard.dart';
+import 'package:bills_bid/home.dart';
 import 'package:bills_bid/register.dart';
 import 'package:bills_bid/resetPassword.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -12,7 +14,57 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginState extends State<LoginPage> {
-  @override
+  TextEditingController _controllerEmail = TextEditingController();
+  TextEditingController _controllerSenha = TextEditingController();
+  String _mensagemErro = "";
+
+  _teste() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const DashboardPage()));
+  }
+
+  _validaCampo() {
+    String email = _controllerEmail.text;
+    String senha = _controllerSenha.text;
+
+    /*if (email.isNotEmpty && email.contains("@")) {
+      if (senha.isNotEmpty && senha.length >= 6) {
+        /*FirebaseAuth auth = FirebaseAuth.instance;
+        auth
+            .signInWithEmailAndPassword(email: email, password: senha)
+            .then((value) => {
+                  print("${value.toString()}"),
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DashboardPage()),
+                      (route) => false)
+                });*/
+        _teste();
+      }*/
+    if (email == "userteste@email.com" && senha == "a!123456") {
+      _teste();
+    } else {
+      setState(() {
+        _mensagemErro = "Password or email are incorrect!";
+      });
+    }
+  }
+
+  /*_verificaUsuarioLogado() {
+    User? usuarioLogado = FirebaseAuth.instance.currentUser;
+    if (usuarioLogado != null) {
+      setState(() {
+        /*Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Home()));*/
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const Home()),
+            (route) => false);
+      });
+    }
+  }*/
+
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
@@ -63,7 +115,8 @@ class _LoginState extends State<LoginPage> {
                           )
                         ],
                       ),
-                      TextFormField(
+                      TextField(
+                        controller: _controllerEmail,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 10.0),
@@ -95,7 +148,8 @@ class _LoginState extends State<LoginPage> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 7),
-                        child: TextFormField(
+                        child: TextField(
+                          controller: _controllerSenha,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 10.0),
@@ -127,6 +181,15 @@ class _LoginState extends State<LoginPage> {
                         ),
                       )
                     ]))),
+                Center(
+                  child: Text(
+                    _mensagemErro,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
                 Padding(
                     padding: EdgeInsets.only(top: 7),
                     child: Row(
@@ -148,12 +211,13 @@ class _LoginState extends State<LoginPage> {
                                           bottomLeft: Radius.circular(18),
                                           bottomRight: Radius.circular(18)))),
                               onPressed: () {
-                                Navigator.push(
+                                _validaCampo();
+                                /*Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           const NavigationSystemC()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
-                                );
+                                );*/
                               },
                               child: const Text("LOGIN",
                                   style: TextStyle(
