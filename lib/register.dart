@@ -10,10 +10,6 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-_cadastraUsuario(String nome, String email, String senha, String Telefone) {
-  FirebaseAuth auth = FirebaseAuth.instance;
-}
-
 class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _controllerNome = TextEditingController();
   TextEditingController _controllerEmail = TextEditingController();
@@ -39,6 +35,8 @@ class _RegisterPageState extends State<RegisterPage> {
         if (phone.isNotEmpty && phone.length >= 10) {
           if (senha.isNotEmpty && senha.length >= 6) {
             if (senha == repetirSenha) {
+              //_teste();
+              _cadastraUsuario(nome, email, senha, phone);
             } else {
               setState(() {
                 _mensagemErro = "The passwords must match!";
@@ -65,7 +63,35 @@ class _RegisterPageState extends State<RegisterPage> {
         _mensagemErro = "Fill in your name correctly!";
       });
     }
-    _teste();
+  }
+
+  _cadastraUsuario(String nome, String email, String senha, String cpf) {
+    FirebaseDatabase db = FirebaseDatabase.instance;
+    FirebaseAuth auth = FirebaseAuth.instance;
+    //db.reference().child("usuarios").child("alksjdlaksjlkasjfkl").set({"nome" : "Gustavo", "email" : "gus"});
+
+    Map<String, dynamic> dadosUsers = {
+      'nome': nome,
+      'email': email,
+      'cpf': cpf,
+    };
+
+    auth
+        .createUserWithEmailAndPassword(email: email, password: senha)
+        .then((firebaseUser) => {
+              //alem disso seta os dados do usuario no banco realtime
+              db.ref("usuarios").child(firebaseUser.user!.uid).set(dadosUsers),
+              _mensagemErro = "Sucesso ao cadastrar!",
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  (route) => false)
+            })
+        .catchError((error) {
+      setState(() {
+        _mensagemErro = "Something went wrong..., $error";
+      });
+    });
   }
 
   @override
