@@ -1,5 +1,7 @@
 import 'package:bills_bid/login.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -8,7 +10,64 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
+_cadastraUsuario(String nome, String email, String senha, String Telefone) {
+  FirebaseAuth auth = FirebaseAuth.instance;
+}
+
 class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController _controllerNome = TextEditingController();
+  TextEditingController _controllerEmail = TextEditingController();
+  TextEditingController _controllerSenha = TextEditingController();
+  TextEditingController _controllerRepetirSenha = TextEditingController();
+  TextEditingController _controllerPhone = TextEditingController();
+  String _mensagemErro = "";
+
+  _teste() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const LoginPage()));
+  }
+
+  _validaCampos() {
+    //recupera dados dos campos
+    String nome = _controllerNome.text;
+    String email = _controllerEmail.text;
+    String senha = _controllerSenha.text;
+    String phone = _controllerPhone.text;
+    String repetirSenha = _controllerRepetirSenha.text;
+    if (nome.isNotEmpty) {
+      if (email.isNotEmpty && email.contains("@")) {
+        if (phone.isNotEmpty && phone.length >= 10) {
+          if (senha.isNotEmpty && senha.length >= 6) {
+            if (senha == repetirSenha) {
+            } else {
+              setState(() {
+                _mensagemErro = "The passwords must match!";
+              });
+            }
+          } else {
+            setState(() {
+              _mensagemErro = "Password must be at least 6 characters long!";
+            });
+          }
+        } else {
+          setState(() {
+            _mensagemErro =
+                "The phone number must contain at least 10 numbers!";
+          });
+        }
+      } else {
+        setState(() {
+          _mensagemErro = "Fill in the email correctly!";
+        });
+      }
+    } else {
+      setState(() {
+        _mensagemErro = "Fill in your name correctly!";
+      });
+    }
+    _teste();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,13 +141,16 @@ class _RegisterPageState extends State<RegisterPage> {
                         ],
                       ),
                     ),
-                    Padding(padding: EdgeInsets.only(top: 25)),
-                    TextFormField(
+                    Padding(padding: EdgeInsets.only(top: 22)),
+                    TextField(
+                      controller: _controllerNome,
+                      keyboardType: TextInputType.name,
+                      autocorrect: false,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 10.0),
                         fillColor: Colors.white,
-                        hintText: "Login",
+                        hintText: "Username",
                         hintStyle: TextStyle(color: Color(0xFFBEBEBE)),
                         filled: true,
                         enabledBorder: OutlineInputBorder(
@@ -114,38 +176,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     Padding(padding: EdgeInsets.only(top: 22)),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 10.0),
-                        fillColor: Colors.white,
-                        hintText: "UserName",
-                        hintStyle: TextStyle(color: Color(0xFFBEBEBE)),
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(0),
-                              topRight: Radius.circular(18),
-                              bottomLeft: Radius.circular(18),
-                              bottomRight: Radius.circular(18)),
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(0),
-                              topRight: Radius.circular(18),
-                              bottomLeft: Radius.circular(18),
-                              bottomRight: Radius.circular(18)),
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(padding: EdgeInsets.only(top: 22)),
-                    TextFormField(
+                    TextField(
+                      controller: _controllerEmail,
+                      keyboardType: TextInputType.emailAddress,
+                      autocorrect: false,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 10.0),
@@ -176,38 +210,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     Padding(padding: EdgeInsets.only(top: 22)),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 10.0),
-                        fillColor: Colors.white,
-                        hintText: "Birth Date",
-                        hintStyle: TextStyle(color: Color(0xFFBEBEBE)),
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(0),
-                              topRight: Radius.circular(18),
-                              bottomLeft: Radius.circular(18),
-                              bottomRight: Radius.circular(18)),
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(0),
-                              topRight: Radius.circular(18),
-                              bottomLeft: Radius.circular(18),
-                              bottomRight: Radius.circular(18)),
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(padding: EdgeInsets.only(top: 22)),
-                    TextFormField(
+                    TextField(
+                      controller: _controllerPhone,
+                      keyboardType: TextInputType.phone,
+                      autocorrect: false,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 10.0),
@@ -238,7 +244,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     Padding(padding: EdgeInsets.only(top: 22)),
-                    TextFormField(
+                    TextField(
+                      controller: _controllerSenha,
+                      keyboardType: TextInputType.visiblePassword,
+                      autocorrect: false,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 10.0),
@@ -269,7 +278,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     Padding(padding: EdgeInsets.only(top: 22)),
-                    TextFormField(
+                    TextField(
+                      controller: _controllerRepetirSenha,
+                      keyboardType: TextInputType.visiblePassword,
+                      autocorrect: false,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 10.0),
@@ -315,12 +327,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                       bottomLeft: Radius.circular(18),
                                       bottomRight: Radius.circular(18)))),
                           onPressed: () {
-                            Navigator.push(
+                            _validaCampos();
+                            /*Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
                                       const RegisterPage()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
-                            );
+                            );*/
                           },
                           child: const Text("CREATE ACCOUNT",
                               style: TextStyle(
@@ -353,6 +366,15 @@ class _RegisterPageState extends State<RegisterPage> {
                             },
                           ),
                         ],
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        _mensagemErro,
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ],
