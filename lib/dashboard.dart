@@ -12,6 +12,51 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardState extends State<DashboardPage> {
+  Widget _Value(value) {
+    return Padding(
+      padding: EdgeInsets.only(right: 30),
+      child: Text(
+        value,
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  Widget _ListGroups(title, description) {
+    return Row(
+      children: [
+        Image.asset('images/green-card.png'),
+        Padding(
+          padding: EdgeInsets.only(left: 7),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                //'Bills',
+                title,
+                style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600),
+              ),
+              Text(
+                //'Heimstaden SA',
+                description,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,10 +100,10 @@ class _DashboardState extends State<DashboardPage> {
                             Container(
                               child: RichText(
                                 text: TextSpan(
-                                    text: '\$',
+                                    text: 'R\$',
                                     children: [
                                       TextSpan(
-                                          text: '135 000', style: TextStyle()),
+                                          text: '135.00', style: TextStyle()),
                                     ],
                                     style: TextStyle(
                                       fontSize: 45,
@@ -154,43 +199,8 @@ class _DashboardState extends State<DashboardPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Image.asset('images/green-card.png'),
-                              Padding(
-                                padding: EdgeInsets.only(left: 7),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Bills',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      'Heimstaden SA',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 30),
-                            child: Text(
-                              '-\$1230',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                          _ListGroups("Monsters SA", "We make people scared!"),
+                          _Value('R\$ 25.000,00'),
                         ],
                       ),
                       SizedBox(
@@ -199,43 +209,8 @@ class _DashboardState extends State<DashboardPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Image.asset('images/green-card.png'),
-                              Padding(
-                                padding: EdgeInsets.only(left: 7),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Pokemon Card',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      'Pokémon Center, NY',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 30),
-                            child: Text(
-                              '-\$372',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                          _ListGroups("Sea Food Rest", "Food, From the Sea!"),
+                          _Value('R\$ 170,00'),
                         ],
                       ),
                       SizedBox(
@@ -244,43 +219,8 @@ class _DashboardState extends State<DashboardPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Image.asset('images/green-card.png'),
-                              Padding(
-                                padding: EdgeInsets.only(left: 7),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Fire Wings',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      'Walmart',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 30),
-                            child: Text(
-                              '+\$135',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                          _ListGroups("Walmart", "Market Spendings"),
+                          _Value('R\$ 950,00'),
                         ],
                       ),
                       SizedBox(
@@ -295,49 +235,17 @@ class _DashboardState extends State<DashboardPage> {
                         ),
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 21,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Image.asset('images/green-card.png'),
-                              Padding(
-                                padding: EdgeInsets.only(left: 7),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Noogler Salary',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      'Google',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 30),
-                            child: Text(
-                              '+\$2830',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                          _ListGroups("Bills", "General Bills!"),
+                          _Value('R\$ 250,00'),
                         ],
+                      ),
+                      SizedBox(
+                        height: 10,
                       ),
                     ],
                   ),

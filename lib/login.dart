@@ -1,10 +1,7 @@
 import 'package:bills_bid/components/NavigationSystem.dart';
-import 'package:bills_bid/dashboard.dart';
-import 'package:bills_bid/home.dart';
 import 'package:bills_bid/register.dart';
 import 'package:bills_bid/resetPassword.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -17,11 +14,6 @@ class _LoginState extends State<LoginPage> {
   TextEditingController _controllerEmail = TextEditingController();
   TextEditingController _controllerSenha = TextEditingController();
   String _mensagemErro = "";
-
-  _teste() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const DashboardPage()));
-  }
 
   _validaCampo() {
     String email = _controllerEmail.text;
@@ -43,27 +35,18 @@ class _LoginState extends State<LoginPage> {
         _teste();
       }*/
     if (email == "userteste@email.com" && senha == "a!123456") {
-      _teste();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                const NavigationSystemC()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
+      );
     } else {
       setState(() {
         _mensagemErro = "Password or email are incorrect!";
       });
     }
   }
-
-  /*_verificaUsuarioLogado() {
-    User? usuarioLogado = FirebaseAuth.instance.currentUser;
-    if (usuarioLogado != null) {
-      setState(() {
-        /*Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Home()));*/
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const Home()),
-            (route) => false);
-      });
-    }
-  }*/
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -212,12 +195,6 @@ class _LoginState extends State<LoginPage> {
                                           bottomRight: Radius.circular(18)))),
                               onPressed: () {
                                 _validaCampo();
-                                /*Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const NavigationSystemC()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
-                                );*/
                               },
                               child: const Text("LOGIN",
                                   style: TextStyle(
