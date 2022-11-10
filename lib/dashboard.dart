@@ -1,7 +1,7 @@
 import 'package:bills_bid/addFunds.dart';
-import 'package:bills_bid/components/NavigationSystem.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:bills_bid/components/NavigationSystem.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -35,7 +35,6 @@ class _DashboardState extends State<DashboardPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                //'Bills',
                 title,
                 style: TextStyle(
                     fontSize: 18,
@@ -43,7 +42,6 @@ class _DashboardState extends State<DashboardPage> {
                     fontWeight: FontWeight.w600),
               ),
               Text(
-                //'Heimstaden SA',
                 description,
                 style: TextStyle(
                   fontSize: 13,

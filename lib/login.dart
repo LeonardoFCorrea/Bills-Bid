@@ -1,6 +1,7 @@
 import 'package:bills_bid/components/NavigationSystem.dart';
 import 'package:bills_bid/register.dart';
 import 'package:bills_bid/resetPassword.dart';
+import 'package:bills_bid/test.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -215,8 +216,7 @@ class _LoginState extends State<LoginPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ResetPassword()));
+                                    builder: (context) => const teste()));
                           },
                         )
                       ],
@@ -246,7 +246,7 @@ class _LoginState extends State<LoginPage> {
                             MaterialPageRoute(
                                 builder: (context) => const RegisterPage()));
                       },
-                    )
+                    ),
                   ],
                 )
               ],
