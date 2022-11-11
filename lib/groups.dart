@@ -77,7 +77,7 @@ class _GroupsState extends State<GroupsPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const createGroupPage()),
+            MaterialPageRoute(builder: (context) => const CreateGroupPage()),
           );
         },
         backgroundColor: Color(0xff7BC144),

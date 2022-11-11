@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AddFundsPage extends StatefulWidget {
-  const AddFundsPage({Key? key}) : super(key: key);
+class PaymentPage extends StatefulWidget {
+  const PaymentPage({Key? key}) : super(key: key);
 
   @override
-  State<AddFundsPage> createState() => _AddFundsPageState();
+  State<PaymentPage> createState() => _PaymentPageState();
 }
 
-class _AddFundsPageState extends State<AddFundsPage> {
-  // bool visible = false;
+class _PaymentPageState extends State<PaymentPage> {
   bool isToggled = false;
 
   @override
@@ -240,7 +239,7 @@ class _AddFundsPageState extends State<AddFundsPage> {
                                           Image.asset("images/wallet.png"),
                                           Padding(
                                             padding: EdgeInsets.only(left: 18),
-                                            child: Text("DEBIT CARD"),
+                                            child: Text("YOUR BALANCE"),
                                           ),
                                         ],
                                       ),
@@ -257,98 +256,160 @@ class _AddFundsPageState extends State<AddFundsPage> {
                         ),
                         Visibility(
                           visible: isToggled,
-                          child: Container(
-                            height: 50,
-                            width: 310,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(3),
-                                topRight: Radius.circular(3),
-                                bottomLeft: Radius.circular(3),
-                                bottomRight: Radius.circular(3),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.shade600,
-                                  offset: Offset(0, 3.8),
-                                  blurRadius: 3,
-                                  spreadRadius: 1,
-                                ),
-                              ],
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(Icons.wallet_outlined),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "ADD FUNDS",
-                                      style: TextStyle(
-                                        color: Color(0xff57902A),
-                                        fontSize: 16,
-                                      ),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 50,
+                                width: 310,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(3),
+                                    topRight: Radius.circular(3),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.shade600,
+                                      offset: Offset(0, 3.8),
+                                      blurRadius: 3,
+                                      spreadRadius: 1,
                                     ),
                                   ],
                                 ),
-                                Row(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
-                                    Text(
-                                      "R\$",
-                                      style: TextStyle(
-                                        color: Color(0xff57902A),
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    SizedBox(
-                                      width: 130,
-                                      height: 25,
-                                      child: TextField(
-                                        keyboardType: TextInputType.number,
-                                        style: TextStyle(
-                                            color: Color(0xff57902A),
-                                            fontSize: 16),
-                                        decoration: InputDecoration(
-                                          border: UnderlineInputBorder(),
-                                          counterText: "",
+                                    Row(
+                                      children: [
+                                        Icon(Icons.wallet_outlined),
+                                        SizedBox(
+                                          width: 10,
                                         ),
-                                        maxLength: 15,
-                                      ),
+                                        Text(
+                                          "Amount to be paid:",
+                                          style: TextStyle(
+                                            color: Color(0xff57902A),
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "R\$",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Color(0xff57902A),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          "134 000,00",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Color(0xff57902A),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 30),
+                                child: Container(
+                                  height: 50,
+                                  width: 280,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(3),
+                                      bottomRight: Radius.circular(3),
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.shade600,
+                                        offset: Offset(0, 3.8),
+                                        blurRadius: 3,
+                                        spreadRadius: 1,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            "New balance:",
+                                            style: TextStyle(
+                                              color: Color(0xff57902A),
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 38,
+                                          ),
+                                          Text(
+                                            "R\$",
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xff57902A),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            "1000,00",
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xff57902A),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 120,
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  primary: Color(0xff7BC144),
+                                  fixedSize: const Size(267, 43),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                ),
+                                child: const Text(
+                                  "PAY",
+                                  style: TextStyle(
+                                    fontFamily: "Arial",
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                onPressed: () {},
+                              ),
+                            ],
                           ),
-                        ),
-                        SizedBox(
-                          height: 131,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            primary: Color(0xff7BC144),
-                            fixedSize: const Size(267, 43),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                          ),
-                          child: const Text(
-                            "ADD FUNDS",
-                            style: TextStyle(
-                              fontFamily: "Arial",
-                              fontSize: 18,
-                              color: Colors.white,
-                            ),
-                          ),
-                          onPressed: () {},
                         ),
                       ],
                     ),

@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class createGroupPage extends StatefulWidget {
-  const createGroupPage({Key? key}) : super(key: key);
+class CreateGroupPage extends StatefulWidget {
+  const CreateGroupPage({Key? key}) : super(key: key);
 
   @override
-  State<createGroupPage> createState() => _ProfileState();
+  State<CreateGroupPage> createState() => _CreateGroupPageState();
 }
 
-class _ProfileState extends State<createGroupPage> {
+class _CreateGroupPageState extends State<CreateGroupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +34,8 @@ class _ProfileState extends State<createGroupPage> {
                     Row(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 14, top: 70),
+                          padding:
+                              EdgeInsets.only(left: 14, top: 70, bottom: 20),
                           child: InkWell(
                             child: Padding(
                               padding: EdgeInsets.only(),
@@ -55,13 +56,6 @@ class _ProfileState extends State<createGroupPage> {
                             onTap: () {
                               Navigator.pop(context);
                             },
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 230, top: 70),
-                          child: IconButton(
-                            icon: Image.asset("images/search.png"),
-                            onPressed: () {},
                           ),
                         ),
                       ],
@@ -228,7 +222,7 @@ class _ProfileState extends State<createGroupPage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const createGroupPage()),
+                                        const CreateGroupPage()),
                               );
                             },
                             child: const Text(
