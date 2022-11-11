@@ -31,11 +31,43 @@ class _ProfileState extends State<createGroupPage> {
               child: Center(
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 110,
+                    Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 14, top: 70),
+                          child: InkWell(
+                            child: Padding(
+                              padding: EdgeInsets.only(),
+                              child: Row(
+                                children: [
+                                  Icon(CupertinoIcons.arrow_left,
+                                      color: Colors.white),
+                                  Text(
+                                    'BACK',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 230, top: 70),
+                          child: IconButton(
+                            icon: Image.asset("images/search.png"),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
                     ),
                     Container(
-                        height: 160,
+                        height: 140,
                         width: 400,
                         decoration: BoxDecoration(
                           color: Color(0xFF559E1C),
@@ -55,18 +87,18 @@ class _ProfileState extends State<createGroupPage> {
                           ],
                         )),
                     SizedBox(
-                      height: 72,
+                      height: 40,
                     ),
                     Container(
                       padding: EdgeInsets.only(left: 16, right: 16),
-                      height: 460,
+                      height: 445,
                       decoration: BoxDecoration(
                         color: Colors.white,
                       ),
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 42,
+                            height: 20,
                           ),
                           TextFormField(
                             decoration: InputDecoration(
@@ -157,14 +189,7 @@ class _ProfileState extends State<createGroupPage> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(15))),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const createGroupPage()),
-                                    );
-                                  },
+                                  onPressed: () {},
                                   child: const Text(
                                     "CODE GENERATE",
                                     style: TextStyle(
@@ -207,7 +232,7 @@ class _ProfileState extends State<createGroupPage> {
                               );
                             },
                             child: const Text(
-                              "EDIT PROFILE",
+                              "CREATE GROUP",
                               style: TextStyle(
                                 fontFamily: "Arial",
                                 fontSize: 18,

@@ -1,4 +1,5 @@
 import 'package:bills_bid/dashboard.dart';
+import 'package:bills_bid/groups.dart';
 import 'package:bills_bid/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class _NavigationSystemCState extends State<NavigationSystemC> {
 
 List<Widget> _buildScreens() {
   return [
-    DashboardPage(),
+    GroupsPage(),
     DashboardPage(),
     ProfilePage(),
   ];

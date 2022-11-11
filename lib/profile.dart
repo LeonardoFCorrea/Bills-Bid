@@ -80,7 +80,7 @@ class _ProfileState extends State<ProfilePage> {
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 16, right: 16),
-                  height: 415,
+                  height: 420,
                   decoration: BoxDecoration(
                     color: Colors.white,
                   ),
