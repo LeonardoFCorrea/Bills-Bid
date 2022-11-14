@@ -1,9 +1,6 @@
-import 'package:bills_bid/addFunds.dart';
-import 'package:bills_bid/components/NavigationSystem.dart';
 import 'package:bills_bid/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -32,45 +29,49 @@ class _DashboardState extends State<DashboardPage> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(top: 70),
-                    child: Container(
-                      height: 81,
-                      width: 278,
-                      decoration: BoxDecoration(
-                          color: Color(0xFF607C4B),
-                          borderRadius: BorderRadius.circular(18)),
-                      child: Padding(
-                        padding:
-                            EdgeInsets.only(left: 13, right: 13, bottom: 5),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 5),
-                                child: Text(
-                                  'YOUR BALANCE',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                child: RichText(
-                                  text: TextSpan(
-                                      text: '\$',
-                                      children: [
-                                        TextSpan(
-                                            text: '135 000',
-                                            style: TextStyle()),
-                                      ],
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 81,
+                          width: 278,
+                          decoration: BoxDecoration(
+                              color: Color(0xFF607C4B),
+                              borderRadius: BorderRadius.circular(18)),
+                          child: Padding(
+                            padding:
+                                EdgeInsets.only(left: 13, right: 13, bottom: 5),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 5),
+                                    child: Text(
+                                      'YOUR BALANCE',
                                       style: TextStyle(
-                                        fontSize: 45,
-                                        fontWeight: FontWeight.bold,
-                                      )),
-                                ),
-                              )
-                            ]),
-                      ),
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    child: RichText(
+                                      text: TextSpan(
+                                          text: '\$',
+                                          children: [
+                                            TextSpan(
+                                                text: '135 000',
+                                                style: TextStyle()),
+                                          ],
+                                          style: TextStyle(
+                                            fontSize: 45,
+                                            fontWeight: FontWeight.bold,
+                                          )),
+                                    ),
+                                  )
+                                ]),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
