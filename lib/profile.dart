@@ -1,4 +1,3 @@
-import 'package:bills_bid/components/NavigationSystem.dart';
 import 'package:bills_bid/editProfile.dart';
 import 'package:flutter/material.dart';
 import 'components/line.dart';
@@ -120,7 +119,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       SizedBox(height: 10),
-                      Line(),
+                      Line(
+                        width: 600,
+                      ),
                       SizedBox(
                         height: 15,
                       ),
@@ -155,7 +156,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       SizedBox(height: 10),
-                      Line(),
+                      Line(
+                        width: 600,
+                      ),
                       SizedBox(
                         height: 15,
                       ),
@@ -190,7 +193,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       SizedBox(height: 10),
-                      Line(),
+                      Line(
+                        width: 600,
+                      ),
                       SizedBox(
                         height: 15,
                       ),
@@ -225,7 +230,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       SizedBox(height: 10),
-                      Line(),
+                      Line(
+                        width: 600,
+                      ),
                       SizedBox(
                         height: 50,
                       ),

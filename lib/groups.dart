@@ -63,6 +63,7 @@ class _GroupsState extends State<GroupsPage> {
                           child: Column(
                             children: [
                               GroupItem(groupName: "Cantalero", members: 3),
+                              GroupItem(groupName: "Cantalero", members: 3),
                             ],
                           )),
                     ),
