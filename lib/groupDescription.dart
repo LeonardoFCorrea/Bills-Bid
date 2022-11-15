@@ -1,6 +1,4 @@
 import 'package:bills_bid/components/group-desc-list.dart';
-import 'package:bills_bid/editProfile.dart';
-import 'package:bills_bid/home.dart';
 import 'package:flutter/material.dart';
 import 'components/line.dart';
 
