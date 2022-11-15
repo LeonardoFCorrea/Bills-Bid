@@ -1,19 +1,15 @@
 import 'package:bills_bid/components/NavigationSystem.dart';
 import 'package:flutter/material.dart';
 import 'components/line.dart';
-import 'package:bills_bid/profile.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class FeedGroup extends StatefulWidget {
-  const FeedGroup({Key? key}) : super(key: key);
 
-  @override
-  State<FeedGroup> createState() => _ProfileState();
-}
+class FeedGroup extends StatelessWidget {
+  final String groupName;
+  final int members;
+  const FeedGroup({Key? key, required this.groupName, required this.members})
+      : super(key: key);
 
-class _ProfileState extends State<FeedGroup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,14 +111,12 @@ class _ProfileState extends State<FeedGroup> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(),
-                  height: 415,
+                  height: 500,
                   decoration: BoxDecoration(
                     color: Colors.white,
                   ),
-                  child: Column(
-                  
-                    children: [
+                 child: Column(
+                    children: [            
                       SizedBox(height: 10),
                       Text(
                         '10 Members',
@@ -131,30 +125,31 @@ class _ProfileState extends State<FeedGroup> {
                           color: Colors.black,
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Line(),
-                      
-                      Container(
-                        height: 45,
-                        width: double.infinity,
-                        alignment: FractionalOffset.centerLeft,
-                        margin:
-                        const EdgeInsets.only(left: 39, right: 39),
-                        padding: const EdgeInsets.all(0),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('images/perfil-teste.png'),
+                      Line(),    
+                      Padding(padding: EdgeInsets.only(right: 100)),
+                      Row(         
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,   
+                        children: [
+                          Container(                
+                                width: 298,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                border: Border.all(color: Color(0xff7BC144))    
+                              ),           
+                              child: Row(
+                              children: [ 
+                              Image.asset('images/perfil-teste.png'),
+                              Text("$members Nome do membro"),   
+                            ],
+                          ),      
                           ),
-                          border:
-                              Border.all(color: Color(0xFF7BC144), width: 1),
-                        ),
-                        child: const Text(
-                          "Leonardo",
-                          style: TextStyle(fontSize: 15),
-                        ),
-                      ),
+                        ],     
+                      ),                                        
                       SizedBox(height: 250),
-                      ElevatedButton(
+                     ],
+                  ),
+                ),
+                ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           primary: Color(0xff7BC144),
@@ -164,12 +159,6 @@ class _ProfileState extends State<FeedGroup> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const FeedGroup(),
-                            ),
-                          );
                         },
                         child: const Text(
                           "CREATE BID",
@@ -180,9 +169,6 @@ class _ProfileState extends State<FeedGroup> {
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
@@ -191,3 +177,4 @@ class _ProfileState extends State<FeedGroup> {
     );
   }
 }
+ 
