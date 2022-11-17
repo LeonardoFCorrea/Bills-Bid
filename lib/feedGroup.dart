@@ -1,15 +1,14 @@
-import 'package:bills_bid/components/NavigationSystem.dart';
-import 'package:flutter/material.dart';
-import 'components/line.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
+class FeedGroup extends StatefulWidget {
+  const FeedGroup({Key? key}) : super(key: key);
 
-class FeedGroup extends StatelessWidget {
-  final String groupName;
-  final int members;
-  const FeedGroup({Key? key, required this.groupName, required this.members})
-      : super(key: key);
+  @override
+  State<FeedGroup> createState() => _FeedGroupState();
+}
 
+class _FeedGroupState extends State<FeedGroup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,151 +24,84 @@ class FeedGroup extends StatelessWidget {
             ],
           ),
         ),
-        child: Padding(
-          padding: EdgeInsets.all(0),
-          child: Center(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 14, top: 25),
-                      child: InkWell(
-                        child: Padding(
-                          padding: EdgeInsets.only(),
-                          child: Row(
-                            children: [
-                              Icon(CupertinoIcons.arrow_left,
-                                  color: Colors.white),
-                              Text(
-                                ' BACK',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 39,
-                ),
-                Container(
-                  height: 140,
-                  width: 400,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF559E1C),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 30),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          'images/perfil-teste.png',
-                          scale: 0.8,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 12),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'É os guri',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(0),
+            child: Center(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 14, top: 20, bottom: 20),
+                        child: InkWell(
+                          child: Padding(
+                            padding: EdgeInsets.only(),
+                            child: Row(
+                              children: [
+                                Icon(CupertinoIcons.arrow_left,
+                                    color: Colors.white),
+                                    Container(
+                                      height: 65,
+                                      width: 65,
+                                      child: Image.asset("images/grupo-teste.png"),
+                                      ),
+                                Padding(padding: EdgeInsets.only(left: 5)),
+                                Column( 
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [                               
+                                  Text(
+                                  'AMIGOS',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w400),
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  'Matheus, Leonardo',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      ),
+                                ),
+                                ],),
+                                Padding(padding: EdgeInsets.only(left:100)),
+                                Icon(CupertinoIcons.ellipsis_vertical, 
+                                color: Colors.white,),
+                              ],
+                            ),
                           ),
-                        )
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 0),
+                  Container(
+                    padding: EdgeInsets.only(left: 16, right: 16),
+                    height: 650,
+                    width: 410,
+                    decoration: BoxDecoration( borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(26),
+                      topRight: Radius.circular(26),
+                    ),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 350,
+                          decoration: BoxDecoration(  
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                ),
-                Padding(padding: EdgeInsets.only(top: 10)),
-                SizedBox(
-                  height: 40,
-                  width: 350,
-                  child: Text(
-                    'ja era rapaiza quebra tudop isso ai descrpition a dsauhihuisaduhiasduihasduhiasuhiduhiasduhidsa..',
-                    style: TextStyle(
-                      fontFamily: 'Arial',
-                      fontSize: 14,
-                      color: Colors.white,
-                      height: 1,
-                    ),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                Container(
-                  height: 500,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                  ),
-                 child: Column(
-                    children: [            
-                      SizedBox(height: 10),
-                      Text(
-                        '10 Members',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
-                      ),
-                      Line(),    
-                      Padding(padding: EdgeInsets.only(right: 100)),
-                      Row(         
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,   
-                        children: [
-                          Container(                
-                                width: 298,
-                                height: 45,
-                                decoration: BoxDecoration(
-                                border: Border.all(color: Color(0xff7BC144))    
-                              ),           
-                              child: Row(
-                              children: [ 
-                              Image.asset('images/perfil-teste.png'),
-                              Text("$members Nome do membro"),   
-                            ],
-                          ),      
-                          ),
-                        ],     
-                      ),                                        
-                      SizedBox(height: 250),
-                     ],
-                  ),
-                ),
-                ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          primary: Color(0xff7BC144),
-                          fixedSize: const Size(267, 43),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                        onPressed: () {
-                        },
-                        child: const Text(
-                          "CREATE BID",
-                          style: TextStyle(
-                            fontFamily: "Arial",
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -177,4 +109,3 @@ class FeedGroup extends StatelessWidget {
     );
   }
 }
- 
