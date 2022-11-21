@@ -1,7 +1,10 @@
-import 'package:bills_bid/components/NavigationSystem.dart';
 import 'package:bills_bid/editProfile.dart';
+import 'package:bills_bid/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'components/line.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -10,259 +13,354 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfileState();
 }
 
+class User {
+  String Name = "";
+  String Email = "";
+  String Phone = "";
+  String Bdate = "";
+}
+
+User UserData = User();
+
+FirebaseAuth auth = FirebaseAuth.instance;
+String Uid = FirebaseAuth.instance.currentUser!.uid;
+
+_atualizar() async {
+  String DocId = "";
+  QuerySnapshot snapshot = await FirebaseFirestore.instance
+      .collection('Users')
+      .where('Uid', isEqualTo: "")
+      .get();
+  List docs = snapshot.docs;
+  docs.forEach((doc) {
+    DocId = doc.id;
+  });
+  print(DocId);
+  /*CollectionReference users = FirebaseFirestore.instance.collection('Users');
+  Future<void> updateUser() {
+    return users
+        .doc(DocId)
+        .update({'Uid': Uid})
+        .then((value) => print("Field Updated!"))
+        .catchError((error) => print("Failed to update user: $error"));
+  }
+
+  updateUser();*/
+}
+
+Future<String> getData(
+    String Name, String Email, String Phone, String Bdate) async {
+  QuerySnapshot snapshot = await FirebaseFirestore.instance
+      .collection('Users')
+      .where('Uid', isEqualTo: Uid)
+      .get();
+  List docs = snapshot.docs;
+  docs.forEach((doc) {
+    UserData.Name = doc[Name];
+    UserData.Email = doc[Email];
+    UserData.Phone = doc[Phone];
+    UserData.Bdate = doc[Bdate];
+  });
+  return UserData.toString();
+}
+
+signOut() async {
+  await auth.signOut();
+}
+
 class _ProfileState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.maxFinite,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF7BC144),
-              Color(0xFF72CB2C),
-              Color(0xFF7BC144),
-            ],
-          ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(0),
-          child: Center(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 110,
+        body: Center(
+      child: FutureBuilder(
+          future: getData('FullName', 'EmailAdress', 'Phone', 'BirthDate'),
+          builder: (context, snapshot) {
+            return Container(
+              height: double.infinity,
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xFF7BC144),
+                    Color(0xFF72CB2C),
+                    Color(0xFF7BC144),
+                  ],
                 ),
-                Container(
-                  height: 140,
-                  width: 400,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF559E1C),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 30),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          'images/perfil-teste.png',
-                          scale: 0.8,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 12),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Matheus Galvain',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                'matheusgalvain',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 72,
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 16, right: 16),
-                  height: 415,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                  ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(0),
+                child: Center(
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 42,
+                        height: 110,
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.person_outline_sharp,
-                            size: 30,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Full Name',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Color(0xff494747),
-                                  ),
+                      Container(
+                        height: 140,
+                        width: 400,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF559E1C),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 30),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'images/perfil-teste.png',
+                                scale: 0.8,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 12),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      UserData.Name,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Text(
+                                      UserData.Email,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  'Matheus Galvain',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Color(0xff494747),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Line(),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.phone_android_outlined,
-                            size: 30,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Phone',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Color(0xff494747),
-                                  ),
-                                ),
-                                Text(
-                                  '+55 (54) 98423-0745',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Color(0xff494747),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Line(),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.calendar_today,
-                            size: 30,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Date',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Color(0xff494747),
-                                  ),
-                                ),
-                                Text(
-                                  '18/09/2005',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Color(0xff494747),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Line(),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.lock_outline_rounded,
-                            size: 30,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Password',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Color(0xff494747),
-                                  ),
-                                ),
-                                Text(
-                                  '**********',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Color(0xff494747),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Line(),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          primary: Color(0xff7BC144),
-                          fixedSize: const Size(267, 43),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
+                              )
+                            ],
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const EditProfilePage(),
+                      ),
+                      SizedBox(
+                        height: 72,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(left: 16, right: 16),
+                        height: 446,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 42,
                             ),
-                          );
-                        },
-                        child: const Text(
-                          "EDIT PROFILE",
-                          style: TextStyle(
-                            fontFamily: "Arial",
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.person_outline_sharp,
+                                  size: 30,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Full Name',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Color(0xff494747),
+                                        ),
+                                      ),
+                                      Text(
+                                        UserData.Name,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Color(0xff494747),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 10),
+                            Line(),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.phone_android_outlined,
+                                  size: 30,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Phone',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Color(0xff494747),
+                                        ),
+                                      ),
+                                      Text(
+                                        UserData.Phone,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Color(0xff494747),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 10),
+                            Line(),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.calendar_today,
+                                  size: 30,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Birth Date',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Color(0xff494747),
+                                        ),
+                                      ),
+                                      Text(
+                                        UserData.Bdate,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Color(0xff494747),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 10),
+                            Line(),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.lock_outline_rounded,
+                                  size: 30,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Password',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Color(0xff494747),
+                                        ),
+                                      ),
+                                      Text(
+                                        //snapshot.data.toString(),
+                                        '**********',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Color(0xff494747),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 10),
+                            Line(),
+                            SizedBox(
+                              height: 50,
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                primary: Color(0xff7BC144),
+                                fixedSize: const Size(267, 43),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const EditProfilePage(),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                "EDIT PROFILE",
+                                style: TextStyle(
+                                  fontFamily: "Arial",
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            /*TextButton(
+                              style: ButtonStyle(
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.red),
+                              ),
+                              onPressed: () {
+                                _atualizar();
+                              },
+                              child: Text('Atualizar'),
+                            )*/
+                            TextButton(
+                              style: ButtonStyle(
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.red),
+                              ),
+                              onPressed: () {
+                                signOut();
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen: Home(),
+                                  withNavBar: false,
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.cupertino,
+                                );
+                              },
+                              child: Text('Sair'),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+              ),
+            );
+          }),
+    ));
   }
 }

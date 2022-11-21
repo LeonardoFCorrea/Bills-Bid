@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'components/group-list.dart';
+
 class teste extends StatefulWidget {
   const teste({super.key});
 
@@ -16,58 +18,28 @@ class _testeState extends State<teste> {
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
-            const Text("\nDATA DE CRIAÇÃO"),
             StreamBuilder<QuerySnapshot>(
               stream:
-                  FirebaseFirestore.instance.collection("Grupos").snapshots(),
+                  FirebaseFirestore.instance.collection("Users").snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
+                final snap = snapshot.data!.docs;
                 if (snapshot.hasData) {
-                  final snap = snapshot.data!.docs;
                   return ListView.builder(
-                    shrinkWrap: true,
-                    primary: false,
-                    itemCount: snap.length,
-                    itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          Image.asset('images/green-card.png'),
-                          Padding(
-                            padding: EdgeInsets.only(left: 7),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  (snap[index]['GroupName']),
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                Text(
-                                  (snap[index]['Description']),
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 30),
-                            child: Text(
-                              (snap[index]['YourExpense']),
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  );
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: snap.length,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            Text((snap[index]['FullName'])),
+                            Text((snap[index]['BirthDate'])),
+                            Text((snap[index]['EmailAdress'])),
+                            Text((snap[index]['Phone'])),
+                            Text("------------------------------------------")
+                          ],
+                        );
+                      });
                 } else {
                   return SizedBox();
                 }
@@ -79,6 +51,3 @@ class _testeState extends State<teste> {
     );
   }
 }
-/*Text((snap[index]['GroupName'] +
-                          " " +
-                          snap[index]['Description']));*/

@@ -1,8 +1,9 @@
 import 'package:bills_bid/components/NavigationSystem.dart';
+import 'package:bills_bid/groups.dart';
 import 'package:bills_bid/register.dart';
 import 'package:bills_bid/resetPassword.dart';
-import 'package:bills_bid/test.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -20,28 +21,19 @@ class _LoginState extends State<LoginPage> {
     String email = _controllerEmail.text;
     String senha = _controllerSenha.text;
 
-    /*if (email.isNotEmpty && email.contains("@")) {
+    if (email.isNotEmpty && email.contains("@")) {
       if (senha.isNotEmpty && senha.length >= 6) {
-        /*FirebaseAuth auth = FirebaseAuth.instance;
+        FirebaseAuth auth = FirebaseAuth.instance;
         auth
             .signInWithEmailAndPassword(email: email, password: senha)
             .then((value) => {
-                  print("${value.toString()}"),
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const DashboardPage()),
+                          builder: (context) => const NavigationSystemC()),
                       (route) => false)
-                });*/
-        _teste();
-      }*/
-    if (email == "userteste@email.com" && senha == "a!123456") {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                const NavigationSystemC()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
-      );
+                });
+      }
     } else {
       setState(() {
         _mensagemErro = "Password or email are incorrect!";
@@ -105,7 +97,7 @@ class _LoginState extends State<LoginPage> {
                           contentPadding: const EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 10.0),
                           fillColor: Colors.white,
-                          hintText: "Login",
+                          hintText: "Email",
                           hintStyle: TextStyle(color: Color(0xFFBEBEBE)),
                           filled: true,
                           enabledBorder: OutlineInputBorder(
@@ -216,7 +208,8 @@ class _LoginState extends State<LoginPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const teste()));
+                                    builder: (context) =>
+                                        const ResetPassword()));
                           },
                         )
                       ],
@@ -246,7 +239,7 @@ class _LoginState extends State<LoginPage> {
                             MaterialPageRoute(
                                 builder: (context) => const RegisterPage()));
                       },
-                    ),
+                    )
                   ],
                 )
               ],

@@ -1,7 +1,7 @@
 import 'package:bills_bid/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -11,32 +11,33 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  TextEditingController _controllerNome = TextEditingController();
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
+//
   TextEditingController _controllerEmail = TextEditingController();
   TextEditingController _controllerSenha = TextEditingController();
   TextEditingController _controllerRepetirSenha = TextEditingController();
   TextEditingController _controllerPhone = TextEditingController();
+  TextEditingController _controllerBdate = TextEditingController();
+  //
   String _mensagemErro = "";
-
-  _teste() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const LoginPage()));
-  }
-
+  //
+  String FullName = "";
+  String Phone = "";
+  String Bdate = "";
+  String EmailAdress = "";
+//
   _validaCampos() {
-    //recupera dados dos campos
-    String nome = _controllerNome.text;
-    String email = _controllerEmail.text;
-    String senha = _controllerSenha.text;
-    String phone = _controllerPhone.text;
+    String EmailAdress = _controllerEmail.text;
+    String Password = _controllerSenha.text;
+
+    //
     String repetirSenha = _controllerRepetirSenha.text;
-    if (nome.isNotEmpty) {
-      if (email.isNotEmpty && email.contains("@")) {
-        if (phone.isNotEmpty && phone.length >= 10) {
-          if (senha.isNotEmpty && senha.length >= 6) {
-            if (senha == repetirSenha) {
-              //_teste();
-              _cadastraUsuario(nome, email, senha, phone);
+    if (FullName.isNotEmpty && FullName.length > 0) {
+      if (EmailAdress.isNotEmpty && EmailAdress.contains("@")) {
+        if (Phone.isNotEmpty && Phone.length >= 10) {
+          if (Password.isNotEmpty && Password.length >= 6) {
+            if (Password == repetirSenha) {
+              _cadastraUsuario(EmailAdress, Password);
             } else {
               setState(() {
                 _mensagemErro = "The passwords must match!";
@@ -55,7 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
         }
       } else {
         setState(() {
-          _mensagemErro = "Fill in the email correctly!";
+          _mensagemErro = "Fill in the EmailAdress correctly!";
         });
       }
     } else {
@@ -65,33 +66,9 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  _cadastraUsuario(String nome, String email, String senha, String cpf) {
-    FirebaseDatabase db = FirebaseDatabase.instance;
+  _cadastraUsuario(String EmailAdress, String Password) {
     FirebaseAuth auth = FirebaseAuth.instance;
-    //db.reference().child("usuarios").child("alksjdlaksjlkasjfkl").set({"nome" : "Gustavo", "email" : "gus"});
-
-    Map<String, dynamic> dadosUsers = {
-      'nome': nome,
-      'email': email,
-      'cpf': cpf,
-    };
-
-    auth
-        .createUserWithEmailAndPassword(email: email, password: senha)
-        .then((firebaseUser) => {
-              //alem disso seta os dados do usuario no banco realtime
-              db.ref("usuarios").child(firebaseUser.user!.uid).set(dadosUsers),
-              _mensagemErro = "Sucesso ao cadastrar!",
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                  (route) => false)
-            })
-        .catchError((error) {
-      setState(() {
-        _mensagemErro = "Something went wrong..., $error";
-      });
-    });
+    auth.createUserWithEmailAndPassword(email: EmailAdress, password: Password);
   }
 
   @override
@@ -169,14 +146,16 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     Padding(padding: EdgeInsets.only(top: 22)),
                     TextField(
-                      controller: _controllerNome,
+                      onChanged: (value) {
+                        FullName = value;
+                      },
                       keyboardType: TextInputType.name,
                       autocorrect: false,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 10.0),
                         fillColor: Colors.white,
-                        hintText: "Username",
+                        hintText: "Full Name",
                         hintStyle: TextStyle(color: Color(0xFFBEBEBE)),
                         filled: true,
                         enabledBorder: OutlineInputBorder(
@@ -203,6 +182,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     Padding(padding: EdgeInsets.only(top: 22)),
                     TextField(
+                      onChanged: (value) {
+                        EmailAdress = value;
+                      },
                       controller: _controllerEmail,
                       keyboardType: TextInputType.emailAddress,
                       autocorrect: false,
@@ -237,6 +219,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     Padding(padding: EdgeInsets.only(top: 22)),
                     TextField(
+                      onChanged: (value) {
+                        Phone = value;
+                      },
                       controller: _controllerPhone,
                       keyboardType: TextInputType.phone,
                       autocorrect: false,
@@ -245,6 +230,43 @@ class _RegisterPageState extends State<RegisterPage> {
                             vertical: 10.0, horizontal: 10.0),
                         fillColor: Colors.white,
                         hintText: "Phone",
+                        hintStyle: TextStyle(color: Color(0xFFBEBEBE)),
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(0),
+                              topRight: Radius.circular(18),
+                              bottomLeft: Radius.circular(18),
+                              bottomRight: Radius.circular(18)),
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(0),
+                              topRight: Radius.circular(18),
+                              bottomLeft: Radius.circular(18),
+                              bottomRight: Radius.circular(18)),
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 22)),
+                    TextField(
+                      onChanged: (value) {
+                        Bdate = value;
+                      },
+                      controller: _controllerBdate,
+                      keyboardType: TextInputType.emailAddress,
+                      autocorrect: false,
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 10.0),
+                        fillColor: Colors.white,
+                        hintText: "Birth Date",
                         hintStyle: TextStyle(color: Color(0xFFBEBEBE)),
                         filled: true,
                         enabledBorder: OutlineInputBorder(
@@ -352,14 +374,21 @@ class _RegisterPageState extends State<RegisterPage> {
                                       topRight: Radius.circular(18),
                                       bottomLeft: Radius.circular(18),
                                       bottomRight: Radius.circular(18)))),
-                          onPressed: () {
+                          onPressed: () async {
                             _validaCampos();
-                            /*Navigator.push(
+                            await users.add({
+                              'FullName': FullName,
+                              'Phone': Phone,
+                              'BirthDate': Bdate,
+                              'EmailAdress': EmailAdress,
+                              'Uid': ""
+                            }).then((value) => print("USER CRIADO"));
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const RegisterPage()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
-                            );*/
+                                builder: (context) => const LoginPage(),
+                              ),
+                            );
                           },
                           child: const Text("CREATE ACCOUNT",
                               style: TextStyle(

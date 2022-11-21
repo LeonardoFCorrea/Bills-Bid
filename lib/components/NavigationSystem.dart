@@ -1,8 +1,11 @@
 import 'package:bills_bid/dashboard.dart';
+import 'package:bills_bid/groups.dart';
 import 'package:bills_bid/profile.dart';
+import 'package:bills_bid/test.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class NavigationSystem extends StatefulWidget {
   const NavigationSystem({Key? key}) : super(key: key);
@@ -69,7 +72,7 @@ class _NavigationSystemCState extends State<NavigationSystemC> {
 
 List<Widget> _buildScreens() {
   return [
-    DashboardPage(),
+    GroupsPage(),
     DashboardPage(),
     ProfilePage(),
   ];

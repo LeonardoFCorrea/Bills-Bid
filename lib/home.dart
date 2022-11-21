@@ -101,8 +101,7 @@ class _CarouselState extends State<Carousel> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              const LoginPage()), //AQUI É PRA MUDAR O REDIRECIONAMENTO - FT WILLIAM
+                          builder: (context) => const LoginPage()),
                     );
                   },
                   child: const Text("LOGIN",

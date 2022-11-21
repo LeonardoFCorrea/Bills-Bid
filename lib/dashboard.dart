@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:bills_bid/components/NavigationSystem.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -12,46 +14,96 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardState extends State<DashboardPage> {
-  Widget _Value(value) {
-    return Padding(
-      padding: EdgeInsets.only(right: 30),
-      child: Text(
-        value,
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
+  String Uid = FirebaseAuth.instance.currentUser!.uid;
+  Widget _ListExpenses() {
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(0),
+      child: Column(
+        children: [
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('Expenses')
+                .where("Members", isEqualTo: Uid)
+                .snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasData) {
+                final snap = snapshot.data!.docs;
+                return ListView.builder(
+                  shrinkWrap: true,
+                  primary: false,
+                  itemCount: snap.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(top: 0, bottom: 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset('images/green-card.png'),
+                              Padding(
+                                padding: EdgeInsets.only(left: 7, top: 3),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      (snap[index]['ExpenseName']),
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    Text(
+                                      (snap[index]['GroupName']),
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 30),
+                            child: Row(
+                              children: [
+                                Text("R\$"),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 7),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        (snap[index]['ExpenseValue']),
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              } else {
+                return SizedBox(
+                  height: 0,
+                );
+              }
+            },
+          )
+        ],
       ),
-    );
-  }
-
-  Widget _ListGroups(title, description) {
-    return Row(
-      children: [
-        Image.asset('images/green-card.png'),
-        Padding(
-          padding: EdgeInsets.only(left: 7),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600),
-              ),
-              Text(
-                description,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.black,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 
@@ -170,7 +222,7 @@ class _DashboardState extends State<DashboardPage> {
                   ),
                 ),
                 Container(
-                  height: 300,
+                  height: 332,
                   width: 395,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -179,71 +231,21 @@ class _DashboardState extends State<DashboardPage> {
                       topRight: Radius.circular(30),
                     ),
                   ),
-                  padding: EdgeInsets.only(left: 30, top: 15),
+                  padding: EdgeInsets.only(left: 30, top: 30),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '14 SEP 2022',
+                        'Last Expenses:',
                         style: TextStyle(
                           fontSize: 15,
                           color: Color(0xFF5C3F06),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
+                      _ListExpenses(),
                       SizedBox(
                         height: 21,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _ListGroups("Monsters SA", "We make people scared!"),
-                          _Value('R\$ 25.000,00'),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _ListGroups("Sea Food Rest", "Food, From the Sea!"),
-                          _Value('R\$ 170,00'),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _ListGroups("Walmart", "Market Spendings"),
-                          _Value('R\$ 950,00'),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 11,
-                      ),
-                      Text(
-                        '14 SEP 2022',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Color(0xFF5C3F06),
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 21,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _ListGroups("Bills", "General Bills!"),
-                          _Value('R\$ 250,00'),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
                       ),
                     ],
                   ),

@@ -2,6 +2,7 @@ import 'package:bills_bid/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -10,7 +11,45 @@ class EditProfilePage extends StatefulWidget {
   State<EditProfilePage> createState() => _EditProfilePageState();
 }
 
+class Profile {
+  String FullName = "";
+  String Email = "";
+  String Phone = "";
+  String Date = "";
+}
+
+Profile UserData = Profile();
+
 class _EditProfilePageState extends State<EditProfilePage> {
+  //Db
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
+  _updateProfile() async {
+    String DocId = "";
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('Users')
+        .where('Uid', isEqualTo: Uid)
+        .get();
+    List docs = snapshot.docs;
+    docs.forEach((doc) {
+      DocId = doc.id.toString();
+    });
+    CollectionReference users = FirebaseFirestore.instance.collection('Users');
+    Future<void> updateUser() {
+      return users
+          .doc(DocId)
+          .update({
+            'FullName': UserData.FullName,
+            'EmailAdress': UserData.Email,
+            'Phone': UserData.Phone,
+            'BirthDate': UserData.Date
+          })
+          .then((value) => print("Field Updated!"))
+          .catchError((error) => print("Failed to update user: $error"));
+    }
+
+    updateUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +107,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 fontWeight: FontWeight.w400,
                                 color: Colors.white),
                           ),
-                          onTap: () {
+                          onTap: () async {
+                            _updateProfile();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -107,8 +147,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     height: 72,
                   ),
                   Container(
-                      padding: EdgeInsets.only(left: 16, right: 16),
-                      height: 380,
+                      padding: EdgeInsets.only(left: 16, right: 16, top: 30),
+                      height: 412,
                       decoration: BoxDecoration(
                         color: Colors.white,
                       ),
@@ -119,6 +159,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               height: 42,
                             ),
                             TextFormField(
+                              onChanged: (value) {
+                                UserData.FullName = value;
+                              },
                               decoration: InputDecoration(
                                 labelText: "Full Name",
                                 counterText: "",
@@ -145,6 +188,37 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   .truncateAfterCompositionEnds,
                             ),
                             TextFormField(
+                              onChanged: (value) {
+                                UserData.Email = value;
+                              },
+                              decoration: InputDecoration(
+                                labelText: "Email",
+                                counterText: "",
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always,
+                                labelStyle: TextStyle(),
+                                icon: Icon(Icons.email_outlined, size: 25),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xff7BC144),
+                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Color(0xff7BC144)),
+                                ),
+                                counterStyle:
+                                    TextStyle(color: Color(0xFF559E1C)),
+                              ),
+                              maxLines: 1,
+                              maxLength: 25,
+                              maxLengthEnforcement: MaxLengthEnforcement
+                                  .truncateAfterCompositionEnds,
+                            ),
+                            TextFormField(
+                              onChanged: (value) {
+                                UserData.Phone = value;
+                              },
                               decoration: InputDecoration(
                                 labelText: "Phone",
                                 counterText: "",
@@ -171,6 +245,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   .truncateAfterCompositionEnds,
                             ),
                             TextFormField(
+                              onChanged: (value) {
+                                UserData.Date = value;
+                              },
                               decoration: InputDecoration(
                                 labelText: "Date",
                                 counterText: "",
@@ -194,60 +271,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               maxLength: 25,
                               maxLengthEnforcement: MaxLengthEnforcement
                                   .truncateAfterCompositionEnds,
-                            ),
-                            TextFormField(
-                              decoration: InputDecoration(
-                                labelText: "Password",
-                                counterText: "",
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                labelStyle: TextStyle(),
-                                icon:
-                                    Icon(Icons.lock_outline_rounded, size: 25),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xff7BC144),
-                                  ),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xff7BC144)),
-                                ),
-                                counterStyle:
-                                    TextStyle(color: Color(0xFF559E1C)),
-                              ),
-                              maxLines: 1,
-                              maxLength: 25,
-                              maxLengthEnforcement: MaxLengthEnforcement
-                                  .truncateAfterCompositionEnds,
-                              obscureText: true,
-                            ),
-                            TextFormField(
-                              decoration: InputDecoration(
-                                labelText: "Confirm Password",
-                                counterText: "",
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                labelStyle: TextStyle(),
-                                icon:
-                                    Icon(Icons.lock_outline_rounded, size: 25),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0xff7BC144),
-                                  ),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Color(0xff7BC144)),
-                                ),
-                                counterStyle:
-                                    TextStyle(color: Color(0xFF559E1C)),
-                              ),
-                              maxLines: 1,
-                              maxLength: 25,
-                              maxLengthEnforcement: MaxLengthEnforcement
-                                  .truncateAfterCompositionEnds,
-                              obscureText: true,
                             ),
                           ],
                         ),

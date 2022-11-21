@@ -39,6 +39,8 @@ dependencies:
   firebase_database: ^10.0.5
   firebase_auth: ^4.1.1
   cloud_firestore: ^4.0.5
+  simple_speed_dial: ^0.1.7
+  randomstring_dart: ^0.0.4
 
 
 dev_dependencies:
