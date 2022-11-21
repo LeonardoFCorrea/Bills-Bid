@@ -124,6 +124,7 @@ class _LoginState extends State<LoginPage> {
                               ),
                             ),
                           ),
+                          obscureText: true,
                         ),
                       )
                     ]))),

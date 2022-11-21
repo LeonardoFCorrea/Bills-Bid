@@ -1,4 +1,5 @@
 import 'package:bills_bid/components/group-desc-list.dart';
+import 'package:bills_bid/expense.dart';
 import 'package:flutter/material.dart';
 import 'components/line.dart';
 
@@ -54,16 +55,9 @@ class _GroupDescriptionState extends State<GroupDescription> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Matheus Galvain',
+                                'GRUPO DOS GURI',
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                'matheusgalvain',
-                                style: TextStyle(
-                                  fontSize: 15,
                                   color: Colors.white,
                                 ),
                               ),
@@ -114,7 +108,7 @@ class _GroupDescriptionState extends State<GroupDescription> {
                   ),
                 ),
                 Container(
-                  height: 395,
+                  height: 350,
                   padding: EdgeInsets.only(bottom: 3),
                   width: 400,
                   decoration: BoxDecoration(
@@ -134,7 +128,7 @@ class _GroupDescriptionState extends State<GroupDescription> {
                       GDescList(nome: "CarolConKa", color: Color(0xffD9D9D9)),
                     ]),
                   ),
-                )
+                ),
               ],
             ),
           ),

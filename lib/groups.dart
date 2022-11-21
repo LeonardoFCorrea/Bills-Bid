@@ -2,6 +2,7 @@ import 'package:bills_bid/createGroup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:simple_speed_dial/simple_speed_dial.dart';
 
 import 'components/group-list.dart';
 
@@ -74,15 +75,77 @@ class _GroupsState extends State<GroupsPage> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const CreateGroupPage()),
-          );
-        },
-        backgroundColor: Color(0xff7BC144),
-        child: Icon(Icons.group_add_outlined, color: Colors.white),
+      floatingActionButton: SpeedDial(
+        child: Icon(Icons.group),
+        closedForegroundColor: Colors.white,
+        openForegroundColor: Colors.white,
+        closedBackgroundColor: Color(0xff559E1C),
+        openBackgroundColor: Color(0xff559E1C),
+        labelsBackgroundColor: Colors.white,
+        speedDialChildren: <SpeedDialChild>[
+          SpeedDialChild(
+            child: Icon(CupertinoIcons.arrow_right),
+            foregroundColor: Colors.white,
+            backgroundColor: Color(0xff7BC144),
+            label: 'Join a Group',
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  backgroundColor: Colors.white,
+                  contentPadding: EdgeInsets.all(0),
+                  buttonPadding: EdgeInsets.all(0),
+                  title: Text(
+                    "Group Code:",
+                    style: TextStyle(
+                      color: Color(0xff7BC144),
+                    ),
+                  ),
+                  content: Padding(
+                    padding: EdgeInsets.only(left: 60, right: 60),
+                    child: TextField(),
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: Text(
+                        'Cancel',
+                        style: TextStyle(
+                          color: Color(0xff7BC144),
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Join'),
+                      child: Text(
+                        'Join',
+                        style: TextStyle(
+                          color: Color(0xff7BC144),
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+            closeSpeedDialOnPressed: false,
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.group_add),
+            foregroundColor: Colors.white,
+            backgroundColor: Color(0xff7BC144),
+            label: 'Create a Group',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const CreateGroupPage()),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

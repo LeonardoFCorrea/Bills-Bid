@@ -9,7 +9,6 @@ class AddFundsPage extends StatefulWidget {
 }
 
 class _AddFundsPageState extends State<AddFundsPage> {
-  // bool visible = false;
   bool isToggled = false;
 
   @override
@@ -240,7 +239,12 @@ class _AddFundsPageState extends State<AddFundsPage> {
                                           Image.asset("images/wallet.png"),
                                           Padding(
                                             padding: EdgeInsets.only(left: 18),
-                                            child: Text("DEBIT CARD"),
+                                            child: Text(
+                                              "DEBIT CARD",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16),
+                                            ),
                                           ),
                                         ],
                                       ),

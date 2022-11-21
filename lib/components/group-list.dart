@@ -1,3 +1,4 @@
+import 'package:bills_bid/feedGroup.dart';
 import 'package:bills_bid/groupDescription.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class GroupItem extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const GroupDescription(),
+                    builder: (context) => const FeedGroup(),
                   ),
                 );
               },
