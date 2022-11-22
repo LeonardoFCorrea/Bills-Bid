@@ -124,7 +124,7 @@ class _LoginState extends State<LoginPage> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 7),
-                        child: TextField(
+                        child: TextFormField(
                           controller: _controllerSenha,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(
@@ -154,6 +154,7 @@ class _LoginState extends State<LoginPage> {
                               ),
                             ),
                           ),
+                          obscureText: true,
                         ),
                       )
                     ]))),

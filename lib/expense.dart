@@ -1,8 +1,11 @@
 import 'package:bills_bid/components/line.dart';
 import 'package:bills_bid/components/select-members.dart';
+import 'package:bills_bid/groupDescription.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ExpensePage extends StatefulWidget {
   const ExpensePage({Key? key}) : super(key: key);
@@ -12,7 +15,12 @@ class ExpensePage extends StatefulWidget {
 }
 
 class _ExpenseState extends State<ExpensePage> {
+  String Uid = FirebaseAuth.instance.currentUser!.uid;
+  CollectionReference expenses =
+      FirebaseFirestore.instance.collection('Expenses');
   bool visibleList = false;
+  String ExpenseName = '';
+  String ExpenseValue = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +70,7 @@ class _ExpenseState extends State<ExpensePage> {
                     height: 20,
                   ),
                   Container(
-                    height: 605,
+                    height: 654,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -79,6 +87,9 @@ class _ExpenseState extends State<ExpensePage> {
                               Padding(
                                 padding: EdgeInsets.only(left: 82, right: 82),
                                 child: TextField(
+                                  onChanged: (value) {
+                                    ExpenseName = value;
+                                  },
                                   decoration: InputDecoration(
                                       hintStyle: TextStyle(fontSize: 18),
                                       hintText: "French Fries",
@@ -98,6 +109,9 @@ class _ExpenseState extends State<ExpensePage> {
                               Padding(
                                 padding: EdgeInsets.only(left: 82, right: 82),
                                 child: TextField(
+                                  onChanged: (value) {
+                                    ExpenseValue = value;
+                                  },
                                   inputFormatters: [
                                     CurrencyTextInputFormatter(
                                         symbol: "",
@@ -120,7 +134,7 @@ class _ExpenseState extends State<ExpensePage> {
                           SizedBox(
                             height: 38,
                           ),
-                          Line(width: 400),
+                          //Line(width: 400),
                           SizedBox(
                             height: 20,
                           ),
@@ -187,10 +201,7 @@ class _ExpenseState extends State<ExpensePage> {
                             visible: visibleList,
                             child: Column(
                               children: [
-                                SelectMembers(nome: "Leo"),
-                                SelectMembers(nome: "Leo"),
-                                SelectMembers(nome: "Leo"),
-                                SelectMembers(nome: "Leo"),
+                                SelectMembers(nome: "Teste"),
                               ],
                             ),
                           ),
@@ -214,7 +225,20 @@ class _ExpenseState extends State<ExpensePage> {
                                 color: Colors.white,
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () async {
+                              await expenses.add({
+                                'ExpenseName': ExpenseName,
+                                'ExpenseValue': ExpenseValue,
+                                'Members': Uid,
+                                'GroupName': 'Aniversario do Pedrola'
+                              }).then((value) => print("EXPENSE CRIADA"));
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const GroupDescription()),
+                              );
+                            },
                           ),
                         ],
                       ),

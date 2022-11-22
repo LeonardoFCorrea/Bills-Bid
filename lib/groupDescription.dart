@@ -72,7 +72,7 @@ class _GroupDescriptionState extends State<GroupDescription> {
                   padding:
                       EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 15),
                   child: Text(
-                    "ja era rapaiz aqui é tudo nosso  quebra tudo mesmo descrição é isso ai foco força e fé...",
+                    "Descrição...",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
@@ -102,13 +102,13 @@ class _GroupDescriptionState extends State<GroupDescription> {
                         ],
                       ),
                       Line(
-                        width: 600,
-                      ),
+                          //width: 600,
+                          ),
                     ],
                   ),
                 ),
                 Container(
-                  height: 350,
+                  height: 550,
                   padding: EdgeInsets.only(bottom: 3),
                   width: 400,
                   decoration: BoxDecoration(
@@ -123,9 +123,6 @@ class _GroupDescriptionState extends State<GroupDescription> {
                       GDescList(nome: "Matheus", color: Color(0xffD9D9D9)),
                       GDescList(nome: "Mike", color: Color(0xff7BC144)),
                       GDescList(nome: "Robson", color: Color(0xffD9D9D9)),
-                      GDescList(nome: "Davi", color: Color(0xffD9D9D9)),
-                      GDescList(nome: "Lucas", color: Color(0xff7BC144)),
-                      GDescList(nome: "CarolConKa", color: Color(0xffD9D9D9)),
                     ]),
                   ),
                 ),

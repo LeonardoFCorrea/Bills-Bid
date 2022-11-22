@@ -41,6 +41,10 @@ dependencies:
   cloud_firestore: ^4.0.5
   simple_speed_dial: ^0.1.7
   randomstring_dart: ^0.0.4
+  extended_masked_text: ^2.3.1
+  currency_text_input_formatter: ^2.1.8
+  smooth_page_indicator: ^1.0.0+2
+
 
 
 dev_dependencies:

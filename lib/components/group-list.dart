@@ -1,3 +1,5 @@
+import 'package:bills_bid/feedGroup.dart';
+import 'package:bills_bid/groupDescription.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -105,8 +107,15 @@ class GroupItem extends StatelessWidget {
                                 ],
                               ),
                               IconButton(
-                                icon: Image.asset("images/config-icon.png"),
-                                onPressed: () {},
+                                icon: Image.asset("images/bell.png"),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const FeedGroup()),
+                                  );
+                                },
                               ),
                             ],
                           ),

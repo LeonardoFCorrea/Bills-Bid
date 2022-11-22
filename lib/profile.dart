@@ -334,7 +334,7 @@ class _ProfileState extends State<ProfilePage> {
                               },
                               child: Text('Atualizar'),
                             )*/
-                            TextButton(
+                            /*TextButton(
                               style: ButtonStyle(
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
@@ -351,7 +351,7 @@ class _ProfileState extends State<ProfilePage> {
                                 );
                               },
                               child: Text('Sair'),
-                            ),
+                            ),*/
                           ],
                         ),
                       ),
