@@ -16,9 +16,29 @@ class GroupsPage extends StatefulWidget {
 String Uid = FirebaseAuth.instance.currentUser!.uid;
 String Code = '';
 
+_DeleteGroup(String Code) async {
+  String DocId = '';
+  final snapshot = await FirebaseFirestore.instance
+      .collection('Groups')
+      .where('GroupID', isEqualTo: Code)
+      .get();
+  List docs = snapshot.docs;
+  docs.forEach((doc) async {
+    DocId = doc.id;
+    if (doc['Adm'] == Uid) {
+      final snap = await FirebaseFirestore.instance
+          .collection('Groups')
+          .doc(DocId)
+          .delete();
+    } else {
+      print('User is not the owner of the Group!');
+    }
+  });
+}
+
 /*_AddMemberArray(String Code) async {
   Map<String, dynamic> someData = {
-    '1': Uid,
+    "Members": Uid,
   };
   String DocId = "";
   QuerySnapshot snapshot = await FirebaseFirestore.instance
@@ -27,7 +47,6 @@ String Code = '';
       .get();
   List docs = snapshot.docs;
   docs.forEach((doc) {
-    print("DOC ID = " + doc.id);
     DocId = doc.id.toString();
   });
   CollectionReference users = FirebaseFirestore.instance.collection('Groups');
@@ -40,32 +59,7 @@ String Code = '';
   }
 
   updateUser();
-  //print("Doc ID Srt = " + DocId);
-}*/
-
-/*_AddMemberConcatenado(String Code) async {
-  String DocId = "";
-  String OldUidList = "";
-  QuerySnapshot snapshot = await FirebaseFirestore.instance
-      .collection('Groups')
-      .where('GroupID', isEqualTo: Code)
-      .get();
-  List docs = snapshot.docs;
-  docs.forEach((doc) {
-    DocId = doc.id;
-    OldUidList = doc['Members'];
-    ;
-  });
-  CollectionReference users = FirebaseFirestore.instance.collection('Groups');
-  Future<void> updateUser() {
-    return users
-        .doc(DocId)
-        .update({'Members': OldUidList + Uid + '@'})
-        .then((value) => print("Field Updated!"))
-        .catchError((error) => print("Failed to update user: $error"));
-  }
-
-  updateUser();
+  print("Doc ID Srt = " + DocId);
 }*/
 
 _AddMember(String Code) async {
@@ -90,7 +84,7 @@ _AddMember(String Code) async {
   updateUser();
 }
 
-_testeSplit() async {
+_searchDocsWithUid() async {
   Future getData() async {
     QuerySnapshot snapshot =
         await FirebaseFirestore.instance.collection('Groups').get();
@@ -98,13 +92,21 @@ _testeSplit() async {
     docs.asMap().forEach((index, doc) {
       if (doc['Members'].contains(Uid)) {
         GroupData.DocId = doc.id;
+        print('Doc' + '[' + index.toString() + '] = ' + GroupData.DocId);
       }
     });
   }
 
-  print(GroupData.DocId);
   getData();
 }
+
+final snackBar = SnackBar(
+  content: const Text('Your are not the owner of the group'),
+  action: SnackBarAction(
+    label: "",
+    onPressed: () {},
+  ),
+);
 
 class _GroupsState extends State<GroupsPage> {
   @override
@@ -135,7 +137,7 @@ class _GroupsState extends State<GroupsPage> {
                         child: IconButton(
                           icon: Image.asset("images/search.png"),
                           onPressed: () {
-                            _testeSplit();
+                            _searchDocsWithUid();
                           },
                         ),
                       ),
@@ -178,10 +180,65 @@ class _GroupsState extends State<GroupsPage> {
         labelsBackgroundColor: Colors.white,
         speedDialChildren: <SpeedDialChild>[
           SpeedDialChild(
+            child: Icon(CupertinoIcons.delete_right_fill),
+            foregroundColor: Colors.white,
+            backgroundColor: Color(0xff7BC144),
+            label: 'Remove a Group',
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  backgroundColor: Colors.white,
+                  contentPadding: EdgeInsets.all(0),
+                  buttonPadding: EdgeInsets.all(0),
+                  title: Text(
+                    "Group Code:",
+                    style: TextStyle(
+                      color: Color(0xff7BC144),
+                    ),
+                  ),
+                  content: Padding(
+                    padding: EdgeInsets.only(left: 60, right: 60),
+                    child: TextField(
+                      onChanged: (value) {
+                        Code = value;
+                      },
+                    ),
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: Text(
+                        'Cancel',
+                        style: TextStyle(
+                          color: Color(0xff7BC144),
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        _DeleteGroup(Code);
+                      },
+                      child: Text(
+                        'Remove',
+                        style: TextStyle(
+                          color: Color(0xff7BC144),
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+            closeSpeedDialOnPressed: false,
+          ),
+          SpeedDialChild(
             child: Icon(CupertinoIcons.arrow_right),
             foregroundColor: Colors.white,
             backgroundColor: Color(0xff7BC144),
-            label: 'Join a Group',
+            label: 'Join Group',
             onPressed: () {
               showDialog(
                 context: context,
@@ -217,6 +274,7 @@ class _GroupsState extends State<GroupsPage> {
                     TextButton(
                       onPressed: () {
                         _AddMember(Code);
+                        //_DeleteGroup(Code);
                         //_AddMemberArray(Code);
                         //_AddMemberConcatenado(Code);
                       },

@@ -13,22 +13,6 @@ Group GroupData = Group();
 class GroupItem extends StatelessWidget {
   String Uid = FirebaseAuth.instance.currentUser!.uid;
 
-  /*_testeSplit() async {
-    Future getData() async {
-      QuerySnapshot snapshot =
-          await FirebaseFirestore.instance.collection('Groups').get();
-      List docs = snapshot.docs;
-      docs.asMap().forEach((index, doc) {
-        if (doc['Members'].contains(Uid)) {
-          GroupData.DocId = doc.id;
-        }
-        print('DOCID = ' + GroupData.DocId);
-      });
-    }
-
-    getData();
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -38,13 +22,13 @@ class GroupItem extends StatelessWidget {
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('Groups')
+                //.where("Members", arrayContainsAny: ["MHUWXcSko4fjRdTTeqP2Iy3WqNJ2"])
                 .where('Members', isEqualTo: Uid)
                 .snapshots(),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasData) {
                 final snap = snapshot.data!.docs;
-                print(snap);
                 return ListView.builder(
                   shrinkWrap: true,
                   primary: false,
@@ -107,7 +91,7 @@ class GroupItem extends StatelessWidget {
                                 ],
                               ),
                               IconButton(
-                                icon: Image.asset("images/bell.png"),
+                                icon: Image.asset("images/config-icon.png"),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
